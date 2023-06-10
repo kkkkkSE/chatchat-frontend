@@ -73,6 +73,21 @@ const defaultTheme = {
 			default: '#F4F4F4',
 		},
 	},
+	alignCenter: {
+		vertical: `
+			display: flex;
+			flex-direction: column;
+			align-content: center;
+			justify-content: center;
+			text-align: center;
+		`,
+		horizontal: `
+			display: flex;
+			align-content: center;
+			justify-content: center;
+			text-align: center;
+		`,
+	},
 };
 
 export default defaultTheme;
