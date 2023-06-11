@@ -1,4 +1,7 @@
 const defaultTheme = {
+	breakPoint: {
+		mobile: 'max-width: 768px',
+	},
 	texts: {
 		bold: {
 			header: `
