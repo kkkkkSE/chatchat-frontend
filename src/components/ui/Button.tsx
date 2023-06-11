@@ -54,7 +54,7 @@ const Button = styled.button.attrs<ButtonProps>(props => ({
     }
   `}
 
-  @media screen and (max-width: 768px) {
+  @media screen and (${props => props.theme.breakPoint.mobile}){
     min-width : 12rem;
     height: 3.6rem;
     line-height: 3.6rem;

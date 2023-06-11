@@ -42,7 +42,7 @@ const Container = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px){
+	@media screen and (${props => props.theme.breakPoint.mobile}){
     margin-block: 0.6rem;
     label{
       span {
