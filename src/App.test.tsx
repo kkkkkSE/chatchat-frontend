@@ -6,6 +6,6 @@ describe('App', () => {
 	it('renders greeting message', () => {
 		render(<App />);
 
-		screen.getByText(/Hello/);
+		screen.getByText(/type/);
 	});
 });
