@@ -40,9 +40,9 @@ jobs:
         run: HEADLESS=true npm run ci
 
       - name: use superfly/flyctl-actions
-      - uses: superfly/flyctl-actions/setup-flyctl@master
+        uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: deploy app
-      - run: flyctl deploy --remote-only
+        run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
