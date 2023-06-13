@@ -6,6 +6,7 @@
   "scripts": {
     "start": "parcel --port 8080",
     "build": "parcel build",
+    "serve": "servor dist index.html 8080 --reload",
     "check": "tsc --noEmit",
     "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
     "test": "jest",
@@ -13,7 +14,8 @@
     "watch:test": "jest --watchAll",
     "codeceptjs": "codeceptjs run --steps",
     "codeceptjs:headless": "HEADLESS=true codeceptjs run --steps",
-    "codeceptjs:ui": "codecept-ui --app"
+    "codeceptjs:ui": "codecept-ui --app",
+    "ci": "concurrently -s first -k 'npm run serve' 'sleep 3 && npm run codeceptjs'"
   },
   "keywords": [],
   "author": "",
