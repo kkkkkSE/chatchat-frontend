@@ -1,13 +1,12 @@
-name: CI
-
+name: CICD
 on:
   push:
     branches:
-      - dev
+      - main
   pull_request:
     branches:
-      - dev
-  
+      - main
+      
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,4 +36,10 @@ jobs:
 
       - name: run E2E test
         run: HEADLESS=true npm run ci
-        
+
+      - name: deploy app
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
