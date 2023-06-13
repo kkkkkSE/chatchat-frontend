@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - "**"
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: npm nstall
+        run: npm ci
+        
+      - name: lint
+        run: npm run lint
+        
+      - name: compile to check syntax
+        run: npm run check
+        
+      - name: run test
+        run: npx jest --verbose --coverage
+        
+      - name: build
+        run: npm run build
+
+      - name: run E2E test
+        run: HEADLESS=true npm run ci
+        
