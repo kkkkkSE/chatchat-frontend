@@ -39,9 +39,7 @@ jobs:
       - name: run E2E test
         run: HEADLESS=true npm run ci
 
-jobs:
   deploy:
-    name: Deploy app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
