@@ -4,12 +4,11 @@ type ButtonProps = {
 	type?: string;
 	color?: 'accent' | 'gray';
 	size?: 'fit';
+	marginTop?: boolean;
 };
 
 const Button = styled.button.attrs<ButtonProps>(props => ({
 	type: props.type ?? 'button',
-	color: props.color,
-	size: props.size,
 }))<ButtonProps>`
   ${props => props.theme.texts.regular.medium};
   min-width : 14rem;
@@ -38,6 +37,10 @@ const Button = styled.button.attrs<ButtonProps>(props => ({
     min-width : auto;
   `}
 
+  ${props => props.marginTop && `
+    margin-top : 5.5rem;
+  `}
+
   ${props => props.color === 'accent' && `
     background-color: ${props.theme.colors.accent.default};
 
@@ -56,14 +59,18 @@ const Button = styled.button.attrs<ButtonProps>(props => ({
 
   @media screen and (${props => props.theme.breakPoint.mobile}){
     min-width : 12rem;
-    height: 3.6rem;
-    line-height: 3.6rem;
+    height: 4.0rem;
+    line-height: 4.0rem;
     margin-inline: .5rem;
     border-radius: 2.0rem;
     ${props => props.theme.texts.regular.small};
 
     ${props => props.size === 'fit' && `
       min-width : auto;
+    `}
+
+    ${props => props.marginTop && `
+      margin-top : 4.6rem;
     `}
   }
 `;
