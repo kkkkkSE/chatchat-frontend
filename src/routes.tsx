@@ -1,7 +1,10 @@
+import PreLoginLayout from './components/PreLoginLayout';
 import HomePage from './pages/HomePage';
 
 const routes = [
-	{path: '/', element: <HomePage />},
+	{element: <PreLoginLayout />, children: [
+		{path: '/', element: <HomePage />},
+	]},
 ];
 
 export default routes;
