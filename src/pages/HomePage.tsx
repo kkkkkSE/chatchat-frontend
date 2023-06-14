@@ -43,4 +43,22 @@ const Container = styled.div`
 		${props => props.theme.texts.regular.large};
 		margin-top: 5.6rem;
 	}
+
+	@media screen and (${props => props.theme.breakPoint.mobile}){
+		div {
+			a {
+				width: 11.4rem;
+				height: 11.4rem;
+				line-height: 11.4rem;
+				border-radius: 1rem;
+				margin-inline: 2rem;
+				${props => props.theme.texts.bold.title}
+			}
+		}
+		
+		p {
+			${props => props.theme.texts.regular.small}
+			margin-top: 3.2rem;
+		}
+	}
 `;

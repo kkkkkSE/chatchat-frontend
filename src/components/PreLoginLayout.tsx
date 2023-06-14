@@ -33,5 +33,13 @@ const Container = styled.div`
 	@media screen and (${props => props.theme.breakPoint.mobile}){
 		width: 100%;
 		padding-inline: 1.6rem;
+
+		.wrapper{
+
+		h1{
+			${props => props.theme.texts.bold.subHeader}
+			margin-bottom: 3.8rem;
+		}
+	}
 	}
 `;
