@@ -3,5 +3,6 @@ Feature('welcome');
 
 Scenario('test something', ({I}) => {
 	I.amOnPage('/');
-	I.see('type');
+
+	I.see('CHATCHAT');
 });
