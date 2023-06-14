@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 Feature('welcome');
 
 Scenario('test something', ({I}) => {
