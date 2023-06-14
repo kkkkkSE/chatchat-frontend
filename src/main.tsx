@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom/client';
 
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import {ThemeProvider} from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
-import {Reset} from 'styled-reset';
+import { Reset } from 'styled-reset';
 
 import routes from './routes';
 
@@ -12,21 +12,22 @@ import defaultTheme from './styles/defaultTheme';
 import GlobalStyle from './styles/GlobalStyle';
 
 function main() {
-	const container = document.getElementById('root');
-	if (!container) {
-		return;
-	}
+  const container = document.getElementById('root');
+  if (!container) {
+    return;
+  }
 
-	const root = ReactDOM.createRoot(container);
+  const root = ReactDOM.createRoot(container);
 
-	const router = createBrowserRouter(routes);
+  const router = createBrowserRouter(routes);
 
-	root.render(
-		<ThemeProvider theme={defaultTheme}>
-			<Reset />
-			<GlobalStyle />
-			<RouterProvider router={router} />
-		</ThemeProvider>);
+  root.render(
+    <ThemeProvider theme={defaultTheme}>
+      <Reset />
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </ThemeProvider>,
+  );
 }
 
 main();

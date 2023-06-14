@@ -6,12 +6,12 @@
 type StepsFile = typeof import('./steps_file.js');
 
 declare namespace CodeceptJS {
-	interface SupportObject {
-		I: I; current: any;
-	}
-	interface Methods extends Playwright {}
-	interface I extends ReturnType<StepsFile> {}
-	namespace Translation {
-		interface Actions {}
-	}
+  interface SupportObject {
+    I: I; current: any;
+  }
+  interface Methods extends Playwright {}
+  interface I extends ReturnType<StepsFile> {}
+  namespace Translation {
+    interface Actions {}
+  }
 }

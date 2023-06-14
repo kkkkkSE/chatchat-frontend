@@ -1,7 +1,7 @@
 Feature('welcome');
 
-Scenario('test something', ({I}) => {
-	I.amOnPage('/');
+Scenario('test something', ({ I }) => {
+  I.amOnPage('/');
 
-	I.see('CHATCHAT');
+  I.see('CHATCHAT');
 });
