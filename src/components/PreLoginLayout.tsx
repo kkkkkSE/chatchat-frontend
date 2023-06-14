@@ -38,7 +38,7 @@ const Container = styled.div`
 
 		h1{
 			${props => props.theme.texts.bold.subHeader}
-			margin-bottom: 3.8rem;
+			margin-bottom: 3.2rem;
 		}
 	}
 	}
