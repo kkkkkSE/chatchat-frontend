@@ -27,7 +27,7 @@ describe('routes', () => {
   });
 
   context('when the current path is “/login”', () => {
-    it('renders <HomePage />', () => {
+    it('renders <LoginPage />', () => {
       setupRouterProvider('/login');
 
       screen.getByLabelText(/아이디/);
@@ -36,7 +36,7 @@ describe('routes', () => {
   });
 
   context('when the current path is “/sign-up', () => {
-    it('renders <HomePage />', () => {
+    it('renders <SignUpPage />', () => {
       setupRouterProvider('/sign-up');
 
       screen.getByLabelText(/비밀번호 확인/);
