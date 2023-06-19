@@ -26,17 +26,29 @@ describe('routes', () => {
     });
   });
 
-  context('when the current path is “/login”', () => {
-    it('renders <HomePage />', () => {
-      setupRouterProvider('/login');
+  describe('when the current path is “/login”', () => {
+    context('"/login" path with type', () => {
+      it('renders <LoginPage />', () => {
+        const type = 'company';
 
-      screen.getByLabelText(/아이디/);
-      screen.getByRole('button', { name: /로그인/ });
+        setupRouterProvider(`/login?type=${type}`);
+
+        screen.getByLabelText(/아이디/);
+        screen.getByRole('button', { name: /로그인/ });
+      });
+    });
+
+    context('"/login" path without type', () => {
+      it('renders <HomePage />', () => {
+        setupRouterProvider('/login');
+
+        screen.getByText(/회원 유형을 선택해주세요/);
+      });
     });
   });
 
   context('when the current path is “/sign-up', () => {
-    it('renders <HomePage />', () => {
+    it('renders <SignUpPage />', () => {
       setupRouterProvider('/sign-up');
 
       screen.getByLabelText(/비밀번호 확인/);
