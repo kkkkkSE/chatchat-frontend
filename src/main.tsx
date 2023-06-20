@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom/client';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import 'reflect-metadata';
+
 import { ThemeProvider } from 'styled-components';
 
 import { Reset } from 'styled-reset';
