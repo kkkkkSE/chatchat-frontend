@@ -8,6 +8,8 @@ import { ThemeProvider } from 'styled-components';
 
 import { Reset } from 'styled-reset';
 
+import 'reflect-metadata';
+
 import routes from './routes';
 
 import defaultTheme from './styles/defaultTheme';
