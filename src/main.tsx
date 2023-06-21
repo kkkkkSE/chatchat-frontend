@@ -4,16 +4,20 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import 'reflect-metadata';
 
-import { ThemeProvider } from 'styled-components';
-
 import { Reset } from 'styled-reset';
 
-import 'reflect-metadata';
+import { ThemeProvider } from 'styled-components';
 
 import routes from './routes';
 
 import defaultTheme from './styles/defaultTheme';
 import GlobalStyle from './styles/GlobalStyle';
+
+import worker from './mocks/worker';
+
+if (process.env.NODE_ENV === 'development') {
+  worker.start();
+}
 
 function main() {
   const container = document.getElementById('root');
