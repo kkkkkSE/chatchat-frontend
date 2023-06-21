@@ -31,7 +31,7 @@ function LoginPage() {
     navigate(`/sign-up?type=${type}`);
   };
 
-  return type && (
+  return (
     <LoginForm
       onClickMoveSignUp={handleClickSignUp}
     />
