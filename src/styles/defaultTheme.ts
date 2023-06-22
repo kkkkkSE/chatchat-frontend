@@ -1,6 +1,6 @@
 const defaultTheme = {
   breakPoint: {
-    mobile: 'max-width: 768px',
+    mobile: 'max-width: 1023px',
   },
   texts: {
     bold: {
