@@ -1,5 +1,5 @@
 const isValidAccessToken = (accessToken:string) => {
-  if (accessToken === 'VAILDACCESSTOKEN') {
+  if (accessToken === 'VALIDACCESSTOKEN') {
     return true;
   }
 
