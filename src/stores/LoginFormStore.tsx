@@ -48,6 +48,8 @@ export default class LoginFormStore {
     this.username = '';
     this.password = '';
     this.accessToken = '';
+    this.type = '';
+    this.errorMessage = '';
   }
 
   @Action()
