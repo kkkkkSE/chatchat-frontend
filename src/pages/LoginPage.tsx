@@ -23,7 +23,7 @@ function LoginPage() {
   useEffect(() => {
     if (accessToken) {
       store.reset();
-      navigate(`/${type}/chatrooms`);
+      navigate(`/chatrooms?type=${type}`);
     }
   }, [accessToken]);
 
