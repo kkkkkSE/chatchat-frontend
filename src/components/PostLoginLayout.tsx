@@ -1,8 +1,18 @@
 import { Outlet } from 'react-router-dom';
+
 import styled from 'styled-components';
+
+import useCheckAccessToken from '../hooks/useCheckAccessToken';
+
 import Header from './Header';
 
 export default function PostLoginLayout() {
+  const ready = useCheckAccessToken();
+
+  if (!ready) {
+    return null;
+  }
+
   return (
     <Container>
       <Header />
