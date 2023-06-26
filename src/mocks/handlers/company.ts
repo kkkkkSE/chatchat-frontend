@@ -14,7 +14,7 @@ const companyHandlers = [
     if (username === 'company1' && password === 'Password1234!') {
       return res(
         ctx.status(201),
-        ctx.json({ accessToken: 'VAILDACCESSTOKEN' }),
+        ctx.json({ accessToken: 'VALIDACCESSTOKEN' }),
       );
     }
 

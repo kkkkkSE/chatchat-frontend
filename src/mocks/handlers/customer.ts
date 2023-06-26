@@ -14,7 +14,7 @@ const customerHandlers = [
     if (username === 'customer1' && password === 'Password1234!') {
       return res(
         ctx.status(201),
-        ctx.json({ accessToken: 'ACCESSTOKEN' }),
+        ctx.json({ accessToken: 'VALIDACCESSTOKEN' }),
       );
     }
 
