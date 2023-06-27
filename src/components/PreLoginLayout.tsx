@@ -1,8 +1,20 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import checkUserType from '../utils/checkUserType';
+
 function PreLoginLayout() {
+  const navigate = useNavigate();
+
+  const { pathname } = useLocation();
+
+  const validUserType = checkUserType();
+
+  if (pathname !== '/' && !validUserType) {
+    navigate('/');
+  }
+
   return (
     <Container>
       <div className="wrapper">

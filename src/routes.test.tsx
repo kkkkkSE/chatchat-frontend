@@ -27,23 +27,11 @@ describe('routes', () => {
   });
 
   describe('when the current path is “/login”', () => {
-    context('"/login" path with type', () => {
-      it('renders <LoginPage />', () => {
-        const type = 'company';
+    it('renders <LoginPage />', () => {
+      setupRouterProvider('/login');
 
-        setupRouterProvider(`/login?type=${type}`);
-
-        screen.getByLabelText(/아이디/);
-        screen.getByRole('button', { name: /로그인/ });
-      });
-    });
-
-    context('"/login" path without type', () => {
-      it('renders <HomePage />', () => {
-        setupRouterProvider('/login');
-
-        screen.getByText(/회원 유형을 선택해주세요/);
-      });
+      screen.getByLabelText(/아이디/);
+      screen.getByRole('button', { name: /로그인/ });
     });
   });
 

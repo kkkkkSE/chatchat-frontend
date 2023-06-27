@@ -8,8 +8,6 @@ import { apiService } from '../services/ApiService';
 @singleton()
 @Store()
 export default class LoginFormStore {
-  type = '';
-
   username = '';
 
   password = '';
@@ -17,11 +15,6 @@ export default class LoginFormStore {
   accessToken = '';
 
   errorMessage = '';
-
-  @Action()
-  setType(type: string) {
-    this.type = type;
-  }
 
   @Action()
   changeUsername(username: string) {
@@ -48,7 +41,6 @@ export default class LoginFormStore {
     this.username = '';
     this.password = '';
     this.accessToken = '';
-    this.type = '';
     this.errorMessage = '';
   }
 
@@ -66,7 +58,6 @@ export default class LoginFormStore {
       this.validate();
 
       const accessToken = await apiService.login({
-        type: this.type ?? '',
         username: this.username,
         password: this.password,
       });

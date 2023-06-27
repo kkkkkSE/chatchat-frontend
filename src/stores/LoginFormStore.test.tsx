@@ -22,17 +22,13 @@ describe('LoginFormStore', () => {
     store = new LoginFormStore();
   });
 
-  describe('checkValidAndLogin', () => {
-    const type = 'company';
-
+  describe('validate and login', () => {
     beforeEach(() => {
       store.reset();
-
-      store.setType(type);
     });
 
     context('empty username', () => {
-      it('errorMessage set to"아이디를 입력해주세요"', async () => {
+      it('errorMessage set to "아이디를 입력해주세요"', async () => {
         await store.login();
 
         expect(store.errorMessage).toBe('아이디를 입력해주세요');
