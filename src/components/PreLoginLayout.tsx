@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -11,9 +12,11 @@ function PreLoginLayout() {
 
   const validUserType = checkUserType();
 
-  if (pathname !== '/' && !validUserType) {
-    navigate('/');
-  }
+  useEffect(() => {
+    if (pathname !== '/' && !validUserType) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   return (
     <Container>

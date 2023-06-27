@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
-
 import { useLocalStorage } from 'usehooks-ts';
 
 import { apiService } from '../services/ApiService';
