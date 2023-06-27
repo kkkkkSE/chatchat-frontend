@@ -1,13 +1,23 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
 import useCheckAccessToken from '../hooks/useCheckAccessToken';
 
+import checkUserType from '../utils/checkUserType';
+
 import Header from './Header';
 
 export default function PostLoginLayout() {
+  const navigate = useNavigate();
+
+  const validUserType = checkUserType();
+
   const ready = useCheckAccessToken();
+
+  if (!validUserType) {
+    navigate('/');
+  }
 
   if (!ready) {
     return null;

@@ -12,6 +12,8 @@ export default class ApiService {
 
   private accessToken = '';
 
+  type : string | null = null;
+
   constructor() {
     this.instance = axios.create({
       baseURL: API_BASE_URL,
@@ -52,13 +54,16 @@ export default class ApiService {
     this.accessToken = accessToken;
   }
 
-  async login({ type, username, password } : {
-    type: string;
+  setType(type:string) {
+    this.type = type;
+  }
+
+  async login({ username, password } : {
     username: string;
     password: string;
   }) {
     const { data } = await this.instance.post(
-      `/${type}/session`,
+      `/${this.type}/session`,
       { username, password },
       { withCredentials: true },
     );
@@ -74,7 +79,7 @@ export default class ApiService {
         { withCredentials: true },
       );
 
-      localStorage.setItem('accessToken', `"${accessToken}"`);
+      localStorage.setItem('accessToken', `${accessToken}`);
 
       return accessToken;
     } catch (error) {

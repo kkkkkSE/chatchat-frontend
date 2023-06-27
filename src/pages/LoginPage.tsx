@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import LoginForm from '../components/login/LoginForm';
+
 import useLoginFormStore from '../hooks/useLoginFormStore';
 
 function LoginPage() {
@@ -8,27 +10,19 @@ function LoginPage() {
 
   const navigate = useNavigate();
 
-  const [searchParams] = useSearchParams();
-  const type = searchParams.get('type');
-
   useEffect(() => {
-    if (type === null) {
-      navigate('/');
-    } else {
-      store.reset();
-      store.setType(type);
-    }
+    store.reset();
   }, []);
 
   useEffect(() => {
     if (accessToken) {
       store.reset();
-      navigate(`/chatrooms?type=${type}`);
+      navigate('/chatrooms');
     }
   }, [accessToken]);
 
   const handleClickSignUp = () => {
-    navigate(`/sign-up?type=${type}`);
+    navigate('/sign-up');
   };
 
   return (

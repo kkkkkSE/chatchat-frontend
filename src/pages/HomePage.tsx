@@ -1,12 +1,34 @@
 import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
 
+import { useLocalStorage } from 'usehooks-ts';
+
+import { apiService } from '../services/ApiService';
+
 function HomePage() {
+  const [, setUserType] = useLocalStorage('userType', '');
+
+  const handleClick = (type : string) => {
+    setUserType(type);
+    apiService.setType(type);
+  };
+
   return (
     <Container>
       <div>
-        <Link to="login?type=company">기업</Link>
-        <Link to="login?type=customer">고객</Link>
+        <Link
+          to="login"
+          onClick={() => handleClick('company')}
+        >
+          기업
+        </Link>
+        <Link
+          to="login"
+          onClick={() => handleClick('customer')}
+        >
+          고객
+        </Link>
       </div>
       <p>회원 유형을 선택해주세요.</p>
     </Container>
