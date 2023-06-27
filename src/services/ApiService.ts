@@ -12,7 +12,7 @@ export default class ApiService {
 
   private accessToken = '';
 
-  type : string | null = null;
+  type : string | undefined = localStorage.getItem('userType')?.slice(1, -1);
 
   constructor() {
     this.instance = axios.create({

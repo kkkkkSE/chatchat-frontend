@@ -17,6 +17,15 @@ const setupRouterProvider = (path: string) => {
   );
 };
 
+const userType = 'company';
+const setUserType = jest.fn();
+
+jest.mock('usehooks-ts', () => ({
+  useLocalStorage: () => (
+    [userType, setUserType]
+  ),
+}));
+
 describe('routes', () => {
   context('when the current path is “/”', () => {
     it('renders <HomePage />', () => {
@@ -26,7 +35,7 @@ describe('routes', () => {
     });
   });
 
-  describe('when the current path is “/login”', () => {
+  context('when the current path is “/login”', () => {
     it('renders <LoginPage />', () => {
       setupRouterProvider('/login');
 

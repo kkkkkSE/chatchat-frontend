@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -15,9 +16,11 @@ export default function PostLoginLayout() {
 
   const ready = useCheckAccessToken();
 
-  if (!validUserType) {
-    navigate('/');
-  }
+  useEffect(() => {
+    if (!validUserType) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   if (!ready) {
     return null;
