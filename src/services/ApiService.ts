@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios, { AxiosInstance } from 'axios';
 
 const API_BASE_URL = process.env.API_BASE_URL || '';
@@ -10,8 +11,6 @@ const TYPES_PLURAL : Record<string, string> = {
 export default class ApiService {
   private instance : AxiosInstance;
 
-  private accessToken = '';
-
   type : string | undefined = localStorage.getItem('userType')?.slice(1, -1);
 
   constructor() {
@@ -19,8 +18,24 @@ export default class ApiService {
       baseURL: API_BASE_URL,
     });
 
+    this.instance.interceptors.request.use((config) => {
+      if (config.url === '/token' || config.url === '/login') {
+        config.withCredentials = true;
+
+        return config;
+      }
+
+      const accessToken = localStorage.getItem('accessToken')?.slice(1, -1);
+
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
+      }
+
+      return config;
+    });
+
     this.instance.interceptors.response.use(
-      async (response) => response,
+      (response) => response,
       async (error) => {
         const { config, response: { status } } = error;
 
@@ -28,30 +43,15 @@ export default class ApiService {
           return Promise.reject(error);
         }
 
-        const newAccessToken = await this.reissueToken();
+        const newToken = await this.reissueToken();
 
-        if (newAccessToken) {
-          this.setAccessToken(newAccessToken);
+        if (newToken) {
+          config.headers.Authorization = `Bearer ${newToken}`;
         }
 
         return axios(config);
       },
     );
-  }
-
-  setAccessToken(accessToken: string) {
-    if (accessToken === this.accessToken) {
-      return;
-    }
-
-    const authorization = accessToken ? `Bearer ${accessToken}` : undefined;
-
-    this.instance = axios.create({
-      baseURL: API_BASE_URL,
-      headers: { Authorization: authorization },
-    });
-
-    this.accessToken = accessToken;
   }
 
   setType(type:string) {
@@ -65,7 +65,6 @@ export default class ApiService {
     const { data } = await this.instance.post(
       `/${this.type}/session`,
       { username, password },
-      { withCredentials: true },
     );
     const { accessToken } = data;
 
@@ -74,12 +73,13 @@ export default class ApiService {
 
   async reissueToken() {
     try {
-      const { data: { accessToken } } = await this.instance.post(
+      const { data } = await this.instance.post(
         '/token',
-        { withCredentials: true },
       );
 
-      localStorage.setItem('accessToken', `${accessToken}`);
+      const { accessToken } = data;
+
+      localStorage.setItem('accessToken', `"${accessToken}"`);
 
       return accessToken;
     } catch (error) {
@@ -87,7 +87,7 @@ export default class ApiService {
 
       window.location.href = '/';
 
-      return '';
+      return error;
     }
   }
 }
