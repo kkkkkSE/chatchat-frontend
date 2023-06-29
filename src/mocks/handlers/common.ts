@@ -14,7 +14,10 @@ const commonHandlers = [
       return res(ctx.status(401));
     }
 
-    return res(ctx.status(201));
+    return res(
+      ctx.status(201),
+      ctx.json({ accessToken: 'VALIDACCESSTOKEN' }),
+    );
   }),
 ];
 
