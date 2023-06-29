@@ -15,6 +15,7 @@ const companyHandlers = [
       return res(
         ctx.status(201),
         ctx.json({ accessToken: 'VALIDACCESSTOKEN' }),
+        ctx.cookie('refreshToken', 'VALIDREFRESHTOKEN'),
       );
     }
 
