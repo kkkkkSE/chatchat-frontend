@@ -1,4 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render as originalRender } from '@testing-library/react';
 
 import type React from 'react';
@@ -9,13 +10,17 @@ import { ThemeProvider } from 'styled-components';
 
 import defaultTheme from './styles/defaultTheme';
 
+const queryClient = new QueryClient();
+
 // eslint-disable-next-line import/prefer-default-export
 export function render(element: React.ReactElement) {
   return originalRender((
     <MemoryRouter initialEntries={['/']}>
-      <ThemeProvider theme={defaultTheme}>
-        {element}
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={defaultTheme}>
+          {element}
+        </ThemeProvider>
+      </QueryClientProvider>
     </MemoryRouter>
   ));
 }
