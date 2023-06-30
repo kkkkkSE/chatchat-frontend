@@ -15,7 +15,7 @@ export interface CustomerProfile {
 export interface ChatRoomSummary {
   id: number;
   receiverName: string;
-  receiverImageURl: string;
+  receiverImageUrl: string;
   lastMessage: string;
   unreadMessageCount: number;
   lastMessageDate: string;

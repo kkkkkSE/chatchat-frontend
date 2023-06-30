@@ -51,8 +51,10 @@ const Container = styled.div`
     .contents{
       width: 64rem;
       height: 100%;
+      position: relative;
       background-color: ${(props) => props.theme.colors.white.default};
       box-shadow: 0 0 1rem rgba(0, 0, 0, 0.16);
+      overflow: scroll;
     }
   }
 

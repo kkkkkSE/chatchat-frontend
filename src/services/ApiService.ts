@@ -90,6 +90,14 @@ export default class ApiService {
       return error;
     }
   }
+
+  async fetchChatList({ page } : {
+    page?: number
+  }) {
+    const { data } = await this.instance.get(`/${this.type}/chatrooms`, { params: { page } });
+
+    return data;
+  }
 }
 
 export const apiService = new ApiService();
