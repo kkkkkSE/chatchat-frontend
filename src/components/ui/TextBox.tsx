@@ -3,7 +3,7 @@ import type React from 'react';
 import styled from 'styled-components';
 
 type TextBoxProps = {
-  label: string;
+  label?: string;
   placeholder?: string;
   type?: 'text' | 'password';
   value: string;
@@ -12,7 +12,7 @@ type TextBoxProps = {
 };
 
 export default function TextBox({
-  label,
+  label = undefined,
   placeholder = undefined,
   type = 'text',
   value,
@@ -30,7 +30,7 @@ export default function TextBox({
   return (
     <Container>
       <label>
-        <span>{label}</span>
+        {label && <span>{label}</span>}
         <input
           type={type}
           placeholder={placeholder}
@@ -45,6 +45,7 @@ export default function TextBox({
 
 const Container = styled.div`
   padding-block: 0.7rem;
+  flex-grow: 1;
   
   label {
     width: 100%;
@@ -104,7 +105,7 @@ const Container = styled.div`
       input{
         ${(props) => props.theme.texts.regular.small};
         width: 100%;
-        height: 3.6rem;
+        height: 4rem;
         padding: .8rem 1.2rem;
       }
     } 

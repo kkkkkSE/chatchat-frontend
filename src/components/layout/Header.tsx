@@ -2,17 +2,17 @@ import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import profileIcon from '../assets/image/icon/profile-icon.png';
-import profileListIcon from '../assets/image/icon/profile-list-icon.png';
-import chatListIcon from '../assets/image/icon/chat-list-icon.png';
-import accountIcon from '../assets/image/icon/account-icon.png';
-import logoutIcon from '../assets/image/icon/logout-icon.png';
+import profileIcon from '../../assets/image/icon/profile-icon.png';
+import profileListIcon from '../../assets/image/icon/profile-list-icon.png';
+import chatListIcon from '../../assets/image/icon/chat-list-icon.png';
+import accountIcon from '../../assets/image/icon/account-icon.png';
+import logoutIcon from '../../assets/image/icon/logout-icon.png';
 
 export default function Header() {
   return (
     <Container>
       <h2>CHATCHAT</h2>
-      <div className="navWrap">
+      <div>
         <nav>
           <NavLink to="/profile">
             <img src={profileIcon} alt="" />
@@ -44,6 +44,8 @@ export default function Header() {
 }
 
 const Container = styled.div`
+  position: absolute;
+  left: 0;
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -60,25 +62,29 @@ const Container = styled.div`
     ${(props) => props.theme.texts.bold.header}
   }
 
-  .navWrap {
+  div {
     flex-grow: 1;
     ${(props) => props.theme.alignCenter.vertical}
     justify-content: space-between;
-  }
 
-  a {
-    padding: 1.2rem;
-    display: flex;
-    border-radius: 1rem;
+    nav {
+      width: 100%;
     
-    img{
-      height: 2.4rem;
-      margin-right: 1.6rem;
-    }
+      a {
+        padding: 1.2rem;
+        display: flex;
+        border-radius: 1rem;
+        
+        img{
+          height: 2.4rem;
+          margin-right: 1.6rem;
+        }
 
-    span{
-      ${(props) => props.theme.texts.bold.boldText}
-      line-height: 2.4rem;
+        span{
+          ${(props) => props.theme.texts.bold.boldText}
+          line-height: 2.4rem;
+        }
+      }
     }
   }
 
@@ -87,45 +93,43 @@ const Container = styled.div`
   }
 
   @media screen and (${(props) => props.theme.breakPoint.mobile}){
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
     width: 100%;
     height: 6rem;
     background-color: ${((props) => props.theme.colors.gray2.default)};
     box-shadow: none;
-    display: flex;
-    justify-content: space-around;
 
     h2 {
       display: none;
     }
 
-    .navWrap {
+    div {
       flex-direction: row;
-      justify-content: center;
-    }
 
-    nav:nth-child(1) { flex-grow : 3 };
-    nav:nth-child(2) { flex-grow : 2 };
+      nav{
+        width: auto;
+        display: flex;
+        justify-content: space-around;
 
-    nav{
-      display: flex;
-      justify-content: space-around;
+        a {
+          padding: 0.8rem;
+          justify-content: center;
+          align-content: center;
+          
+          img{
+            margin: 0;
+          }
 
-      a {
-        padding: 0.8rem;
-        justify-content: center;
-        align-content: center;
-        
-        img{
-          margin: 0;
-        }
-
-        span{
-          display: none;
+          span{
+            display: none;
+          }
         }
       }
+
+      nav:nth-child(1) { flex-grow : 3 };
+      nav:nth-child(2) { flex-grow : 2 };
     }
 
     a.active{
@@ -135,6 +139,5 @@ const Container = styled.div`
         filter: brightness(100);
       }
     }
-}
-
+  }
 `;

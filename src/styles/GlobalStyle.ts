@@ -57,6 +57,9 @@ const GlobalStyle = createGlobalStyle`
   button {
     outline: none;
     border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
   }
 `;
 

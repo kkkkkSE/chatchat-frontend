@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import checkUserType from '../utils/checkUserType';
+import checkUserType from '../../utils/checkUserType';
 
 function PreLoginLayout() {
   const navigate = useNavigate();
