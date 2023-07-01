@@ -1,11 +1,11 @@
-import commonHandlers from './common';
-import companyHandlers from './company';
-import customerHandlers from './customer';
+import common from './common';
+import company from './company';
+import customer from './customer';
 
 const handlers = [
-  ...companyHandlers,
-  ...customerHandlers,
-  ...commonHandlers,
+  ...company,
+  ...customer,
+  ...common,
 ];
 
 export default handlers;

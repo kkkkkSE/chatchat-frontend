@@ -42,19 +42,6 @@ const customerHandlers = [
 
     return res(ctx.status(201));
   }),
-  rest.get(`${BASE_URL}/customers/me`, (req, res, ctx) => {
-    const { customer } = fixtures;
-
-    const authorization = req.headers.get('Authorization');
-    const accessToken = authorization ? authorization.split(' ')[1] : '';
-
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
-
-    return res(
-      ctx.status(200),
-      ctx.json({ customer }),
-    );
-  }),
   rest.patch(`${BASE_URL}/customers/me`, (req, res, ctx) => {
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
@@ -99,7 +86,7 @@ const customerHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json({ customer }),
+      ctx.json(customer),
     );
   }),
   rest.delete(`${BASE_URL}/customers/me`, async (req, res, ctx) => {
@@ -118,7 +105,7 @@ const customerHandlers = [
   }),
 
   rest.get(`${BASE_URL}/customer/chatrooms`, (req, res, ctx) => {
-    const { chatRooms } = fixtures;
+    const { chatRooms, page } = fixtures;
 
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
@@ -127,11 +114,11 @@ const customerHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json({ chatRooms }),
+      ctx.json({ chatRooms, page }),
     );
   }),
   rest.get(`${BASE_URL}/customer/chatrooms/:id`, (req, res, ctx) => {
-    const { chatRoom } = fixtures;
+    const { chatRoom, page } = fixtures;
 
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
@@ -140,11 +127,11 @@ const customerHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json({ chatRoom }),
+      ctx.json({ ...chatRoom, ...page }),
     );
   }),
   rest.get(`${BASE_URL}/companies`, async (req, res, ctx) => {
-    const { companies } = fixtures;
+    const { companies, page } = fixtures;
 
     const keyword = req.url.searchParams.get('keyword');
 
@@ -158,7 +145,7 @@ const customerHandlers = [
 
       return res(
         ctx.status(200),
-        ctx.json({ filteredCompanies }),
+        ctx.json({ filteredCompanies, page }),
       );
     }
 
@@ -178,7 +165,7 @@ const customerHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json({ company }),
+      ctx.json(company),
     );
   }),
 ];
