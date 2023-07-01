@@ -80,13 +80,13 @@ const defaultTheme = {
     vertical: `
       display: flex;
       flex-direction: column;
-      align-content: center;
+      align-items: center;
       justify-content: center;
       text-align: center;
     `,
     horizontal: `
       display: flex;
-      align-content: center;
+      align-items: center;
       justify-content: center;
       text-align: center;
     `,

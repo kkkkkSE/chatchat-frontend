@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import useAccessToken from '../../hooks/useAccessToken';
 import useLoginFormStore from '../../hooks/useLoginFormStore';
 import Button from '../ui/Button';
@@ -38,7 +39,7 @@ export default function LoginForm({
   };
 
   return (
-    <div>
+    <Container>
       <form onSubmit={handleSubmit}>
         <TextBox
           label="아이디"
@@ -69,6 +70,10 @@ export default function LoginForm({
           <ErrorMessage>{errorMessage}</ErrorMessage>
         )}
       </form>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100%;
+`;

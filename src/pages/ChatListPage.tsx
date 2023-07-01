@@ -1,5 +1,5 @@
+import ContentLayout from '../components/layout/ContentLayout';
 import ChatList from '../components/chat/ChatList';
-import NavigationBar from '../components/ui/NavigationBar';
 
 import useFetchChatList from '../hooks/useFetchChatList';
 
@@ -12,12 +12,13 @@ export default function ChatListPage() {
   // TODO : 로딩화면 Skeleton 구현
   return (
     <div>
-      <NavigationBar>채팅 목록</NavigationBar>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <ChatList chatRooms={chatRooms} />
-      )}
+      <ContentLayout page="채팅 목록">
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <ChatList chatRooms={chatRooms} />
+        )}
+      </ContentLayout>
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import PostLoginLayout from './components/PostLoginLayout';
-import PreLoginLayout from './components/PreLoginLayout';
+import PostLoginLayout from './components/layout/PostLoginLayout';
+import PreLoginLayout from './components/layout/PreLoginLayout';
 import ChatListPage from './pages/ChatListPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
