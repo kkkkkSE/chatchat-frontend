@@ -42,19 +42,6 @@ const companyHandlers = [
 
     return res(ctx.status(201));
   }),
-  rest.get(`${BASE_URL}/companies/me`, (req, res, ctx) => {
-    const { company } = fixtures;
-
-    const authorization = req.headers.get('Authorization');
-    const accessToken = authorization ? authorization.split(' ')[1] : '';
-
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
-
-    return res(
-      ctx.status(200),
-      ctx.json({ company }),
-    );
-  }),
   rest.patch(`${BASE_URL}/companies/me`, (req, res, ctx) => {
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
@@ -99,7 +86,7 @@ const companyHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json({ company }),
+      ctx.json(company),
     );
   }),
   rest.delete(`${BASE_URL}/companies/me`, async (req, res, ctx) => {
@@ -118,7 +105,7 @@ const companyHandlers = [
   }),
 
   rest.get(`${BASE_URL}/company/chatrooms`, (req, res, ctx) => {
-    const { chatRooms } = fixtures;
+    const { chatRooms, page } = fixtures;
 
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
@@ -127,11 +114,11 @@ const companyHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json({ chatRooms }),
+      ctx.json({ chatRooms, page }),
     );
   }),
   rest.get(`${BASE_URL}/company/chatrooms/:id`, (req, res, ctx) => {
-    const { chatRoom } = fixtures;
+    const { chatRoom, page } = fixtures;
 
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
@@ -140,7 +127,7 @@ const companyHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json({ chatRoom }),
+      ctx.json({ ...chatRoom, ...page }),
     );
   }),
   rest.get(`${BASE_URL}/auto-replies`, (req, res, ctx) => {

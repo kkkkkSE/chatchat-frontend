@@ -5,6 +5,7 @@ import companies from './companies';
 import company from './company';
 import customer from './customer';
 import messages from './messages';
+import page from './page';
 
 export default {
   company,
@@ -14,4 +15,5 @@ export default {
   chatRooms,
   messages,
   autoReplies,
+  page,
 };

@@ -1,10 +1,10 @@
 import messages from './messages';
 
 const chatRoom = {
-  chatRoomId: 1,
+  id: 1,
   receiverId: 1,
   receiverName: '장첸',
-  receiverImageUrl: '이미지',
+  receiverImageUrl: 'https://example.com/4',
   messages,
 };
 
