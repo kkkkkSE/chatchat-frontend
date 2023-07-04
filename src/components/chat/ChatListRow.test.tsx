@@ -16,8 +16,13 @@ describe('<ChatListRow />', () => {
     lastMessageDate: '1111.11.11 11:11:11',
   };
 
+  const handleChatRoomClick = jest.fn();
+
   it('render chat room summary', () => {
-    render(<ChatListRow chatRoomSummary={chatRoomSummary} />);
+    render(<ChatListRow
+      chatRoomSummary={chatRoomSummary}
+      handleChatRoomClick={handleChatRoomClick}
+    />);
 
     screen.getByText(/메세지 1/);
   });
@@ -29,7 +34,10 @@ describe('<ChatListRow />', () => {
       });
 
       it('not rendered unread message count', () => {
-        const { container } = render(<ChatListRow chatRoomSummary={chatRoomSummary} />);
+        const { container } = render(<ChatListRow
+          chatRoomSummary={chatRoomSummary}
+          handleChatRoomClick={handleChatRoomClick}
+        />);
 
         expect(container).not.toHaveTextContent('0');
       });
@@ -41,7 +49,10 @@ describe('<ChatListRow />', () => {
       });
 
       it('render unread message count', () => {
-        const { container } = render(<ChatListRow chatRoomSummary={chatRoomSummary} />);
+        const { container } = render(<ChatListRow
+          chatRoomSummary={chatRoomSummary}
+          handleChatRoomClick={handleChatRoomClick}
+        />);
 
         expect(container).toHaveTextContent('3');
       });
@@ -53,7 +64,10 @@ describe('<ChatListRow />', () => {
       });
 
       it('render +999', () => {
-        const { container } = render(<ChatListRow chatRoomSummary={chatRoomSummary} />);
+        const { container } = render(<ChatListRow
+          chatRoomSummary={chatRoomSummary}
+          handleChatRoomClick={handleChatRoomClick}
+        />);
 
         expect(container).toHaveTextContent('+999');
       });

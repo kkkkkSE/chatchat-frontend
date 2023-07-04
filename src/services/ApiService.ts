@@ -83,9 +83,9 @@ export default class ApiService {
 
       return accessToken;
     } catch (error) {
-      localStorage.removeItem('accessToken');
+      // localStorage.removeItem('accessToken');
 
-      window.location.href = '/';
+      // window.location.href = '/';
 
       return error;
     }
@@ -94,7 +94,22 @@ export default class ApiService {
   async fetchChatList({ page } : {
     page?: number
   }) {
-    const { data } = await this.instance.get(`/${this.type}/chatrooms`, { params: { page } });
+    const { data } = await this.instance.get(
+      `/${this.type}/chatrooms`,
+      { params: { page } },
+    );
+
+    return data;
+  }
+
+  async fetchChatRoom({ id, page } : {
+    id: string
+    page?: number
+  }) {
+    const { data } = await this.instance.get(
+      `/${this.type}/chatrooms/${id}`,
+      { params: { page } },
+    );
 
     return data;
   }

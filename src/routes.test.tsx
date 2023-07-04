@@ -1,10 +1,14 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { render, screen } from '@testing-library/react';
+
 import { ThemeProvider } from 'styled-components';
 
+import { render, screen } from '@testing-library/react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import routes from './routes';
+
 import defaultTheme from './styles/defaultTheme';
 
 const queryClient = new QueryClient();
@@ -62,10 +66,18 @@ describe('routes', () => {
 
   describe('after login', () => {
     context('when the current path is “/chatrooms', () => {
-      it('renders <ChatList />', () => {
+      it('renders <ChatListPage />', () => {
         setupRouterProvider('/chatrooms');
 
         expect(screen.getAllByText(/채팅 목록/)).toHaveLength(2);
+      });
+    });
+
+    context('when the current path is “/chatrooms/:chatRoomId', () => {
+      it('renders <ChatRoomPage />', () => {
+        setupRouterProvider('/chatrooms/1');
+
+        screen.getByText(/채팅 내역/);
       });
     });
   });

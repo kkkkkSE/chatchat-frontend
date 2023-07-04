@@ -4,7 +4,7 @@
   "description": "CHATCHAT Web App",
   "source": "./index.html",
   "scripts": {
-    "start": "parcel --port 8080",
+    "start": "parcel --https --cert=./localhost+2.pem --key=./localhost+2-key.pem",
     "build": "parcel build",
     "serve": "servor dist index.html 8080 --reload",
     "check": "tsc --noEmit",
@@ -60,10 +60,14 @@
   "dependencies": {
     "@stomp/stompjs": "^7.0.0",
     "@tanstack/react-query": "^4.29.15",
+    "@types/sockjs-client": "^1.5.1",
+    "@types/stompjs": "^2.3.5",
     "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.5.2",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.12.1",
     "reflect-metadata": "^0.1.13",
     "sockjs-client": "^1.6.1",

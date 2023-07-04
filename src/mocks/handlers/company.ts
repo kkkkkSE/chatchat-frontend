@@ -118,7 +118,17 @@ const companyHandlers = [
     );
   }),
   rest.get(`${BASE_URL}/company/chatrooms/:id`, (req, res, ctx) => {
-    const { chatRoom, page } = fixtures;
+    const { chatRoom } = fixtures;
+
+    const page = {
+      current: req.url.searchParams.get('page') || 1,
+      total: Math.ceil(chatRoom.messages.length / 2),
+    };
+
+    const start = Number(page.current) * 10 - 10;
+    const sliceMessages = chatRoom.messages.slice(start, start + 20);
+
+    chatRoom.messages = sliceMessages;
 
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
@@ -127,7 +137,7 @@ const companyHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json({ ...chatRoom, ...page }),
+      ctx.json({ ...chatRoom, page }),
     );
   }),
   rest.get(`${BASE_URL}/auto-replies`, (req, res, ctx) => {
