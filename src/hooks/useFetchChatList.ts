@@ -1,11 +1,31 @@
-import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
+
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { apiService } from '../services/ApiService';
 
-const useFetchChatList = (page?: number) => {
-  const fetcher = () => apiService.fetchChatList({ page });
+const useFetchChatList = (trigger: boolean) => {
+  const {
+    isLoading, data, isPreviousData, fetchNextPage,
+  } = useInfiniteQuery(
+    ['chatList'],
+    ({ pageParam = 1 }) => apiService.fetchChatList({ page: pageParam }),
+    {
+      getNextPageParam: (lastPage) => {
+        const cur = lastPage.page.current;
+        if (lastPage.page.total > cur) {
+          return cur + 1;
+        }
+        return undefined;
+      },
+    },
+  );
 
-  const { isLoading, data } = useQuery(['chatList'], fetcher);
+  useEffect(() => {
+    if (!isPreviousData && trigger) {
+      fetchNextPage();
+    }
+  }, [trigger]);
 
   return { isLoading, data };
 };

@@ -7,10 +7,10 @@ import transformDate from '../../utils/transformDate';
 import ProfileImage from '../ui/ProfileImage';
 
 interface ChatListRowProps {
-  chatRoomSummary : ChatRoomSummary;
+  chatRoom : ChatRoomSummary;
 }
 
-function ChatListRow({ chatRoomSummary }: ChatListRowProps) {
+function ChatListRow({ chatRoom }: ChatListRowProps) {
   const displayUnreadCount = (count: number) => {
     if (count > 999) return <span>+999</span>;
     if (count > 0) return <span>{count}</span>;
@@ -21,18 +21,18 @@ function ChatListRow({ chatRoomSummary }: ChatListRowProps) {
     <Container>
       <div>
         <ProfileImage
-          src={chatRoomSummary.receiverImageUrl}
-          alt={chatRoomSummary.receiverName}
+          src={chatRoom.receiverImageUrl}
+          alt={chatRoom.receiverName}
         />
       </div>
       <div>
         <div>
-          <b>{chatRoomSummary.receiverName}</b>
-          <p>{chatRoomSummary.lastMessage}</p>
+          <b>{chatRoom.receiverName}</b>
+          <p>{chatRoom.lastMessage}</p>
         </div>
         <div>
-          <small>{transformDate(chatRoomSummary.lastMessageDate)}</small>
-          {displayUnreadCount(chatRoomSummary.unreadMessageCount)}
+          <small>{transformDate(chatRoom.lastMessageDate)}</small>
+          {displayUnreadCount(chatRoom.unreadMessageCount)}
         </div>
       </div>
     </Container>

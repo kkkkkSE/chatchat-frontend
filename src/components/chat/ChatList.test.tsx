@@ -1,26 +1,57 @@
 import { screen } from '@testing-library/react';
+import fixtures from '../../../fixtures';
 
 import { render } from '../../test-helper';
-
-import fixtures from '../../../fixtures';
 
 import ChatList from './ChatList';
 
 const context = describe;
 
-describe('<CahtList />', () => {
-  const { chatRooms } = fixtures;
+const mockFetchData = {
+  isLoading: false,
+  data: {
+    pages: [{
+      chatRooms: fixtures.chatRooms,
+      page: fixtures.page,
+    }],
+  },
+};
 
+jest.mock('../../hooks/useFetchChatList', () => () => mockFetchData);
+
+jest.mock('react-intersection-observer', () => ({
+  useInView: () => [],
+}));
+
+describe('<CahtList />', () => {
   it('render chat list', () => {
-    render(<ChatList chatRooms={chatRooms} />);
+    render(<ChatList />);
 
     screen.getByText(/이름1/);
     screen.getByText(/\+999/);
   });
 
   context('empty chat list', () => {
-    render(<ChatList chatRooms={[]} />);
+    beforeEach(() => {
+      mockFetchData.data.pages[0].chatRooms = [];
+    });
 
-    screen.getByText(/진행중인 대화가 없습니다/);
+    it('render empty message', () => {
+      render(<ChatList />);
+
+      screen.getByText(/진행중인 대화가 없습니다/);
+    });
+  });
+
+  context('when loading', () => {
+    beforeEach(() => {
+      mockFetchData.isLoading = true;
+    });
+
+    it('render loading message', () => {
+      render(<ChatList />);
+
+      screen.getByText(/Loading/);
+    });
   });
 });
