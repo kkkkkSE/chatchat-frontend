@@ -7,7 +7,7 @@ import ChatListRow from './ChatListRow';
 const context = describe;
 
 describe('<ChatListRow />', () => {
-  const chatRoomSummary = {
+  const chatRoom = {
     id: 1,
     receiverName: '이름1',
     receiverImageUrl: 'https://example.com/4',
@@ -17,7 +17,7 @@ describe('<ChatListRow />', () => {
   };
 
   it('render chat room summary', () => {
-    render(<ChatListRow chatRoomSummary={chatRoomSummary} />);
+    render(<ChatListRow chatRoom={chatRoom} />);
 
     screen.getByText(/메세지 1/);
   });
@@ -25,11 +25,11 @@ describe('<ChatListRow />', () => {
   describe('about unread message count', () => {
     context('0 unread message', () => {
       beforeEach(() => {
-        chatRoomSummary.unreadMessageCount = 0;
+        chatRoom.unreadMessageCount = 0;
       });
 
       it('not rendered unread message count', () => {
-        const { container } = render(<ChatListRow chatRoomSummary={chatRoomSummary} />);
+        const { container } = render(<ChatListRow chatRoom={chatRoom} />);
 
         expect(container).not.toHaveTextContent('0');
       });
@@ -37,11 +37,11 @@ describe('<ChatListRow />', () => {
 
     context('1~999 unread message', () => {
       beforeEach(() => {
-        chatRoomSummary.unreadMessageCount = 3;
+        chatRoom.unreadMessageCount = 3;
       });
 
       it('render unread message count', () => {
-        const { container } = render(<ChatListRow chatRoomSummary={chatRoomSummary} />);
+        const { container } = render(<ChatListRow chatRoom={chatRoom} />);
 
         expect(container).toHaveTextContent('3');
       });
@@ -49,11 +49,11 @@ describe('<ChatListRow />', () => {
 
     context('more than 1000 unread message', () => {
       beforeEach(() => {
-        chatRoomSummary.unreadMessageCount = 1000;
+        chatRoom.unreadMessageCount = 1000;
       });
 
       it('render +999', () => {
-        const { container } = render(<ChatListRow chatRoomSummary={chatRoomSummary} />);
+        const { container } = render(<ChatListRow chatRoom={chatRoom} />);
 
         expect(container).toHaveTextContent('+999');
       });
