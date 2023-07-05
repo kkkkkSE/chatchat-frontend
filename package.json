@@ -4,7 +4,7 @@
   "description": "CHATCHAT Web App",
   "source": "./index.html",
   "scripts": {
-    "start": "parcel --port 8080",
+    "start": "parcel --https --cert=./localhost+2.pem --key=./localhost+2-key.pem --port 8080",
     "build": "parcel build",
     "serve": "servor dist index.html 8080 --reload",
     "check": "tsc --noEmit",

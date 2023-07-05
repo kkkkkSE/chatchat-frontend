@@ -147,3 +147,6 @@ dist
 /output/
 
 /.swc/
+
+# pem
+*.pem
