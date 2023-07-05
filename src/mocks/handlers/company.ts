@@ -105,29 +105,57 @@ const companyHandlers = [
   }),
 
   rest.get(`${BASE_URL}/company/chatrooms`, (req, res, ctx) => {
-    const { chatRooms, page } = fixtures;
+    const { chatRooms } = fixtures;
 
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
     if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
 
+    const COUNT_UNIT = 10;
+
+    const page = {
+      current: Number(req.url.searchParams.get('page')) || 1,
+      total: Math.ceil(chatRooms.length / COUNT_UNIT) || 1,
+    };
+
+    if (page.current > page.total || page.current < 1 || !Number.isInteger(page.current)) {
+      return res(ctx.status(400), ctx.json({ message: 'Page가 유효하지 않습니다.' }));
+    }
+
+    const start = page.current * COUNT_UNIT - COUNT_UNIT;
+    const sliceChatRooms = chatRooms.slice(start, start + COUNT_UNIT);
+
     return res(
       ctx.status(200),
-      ctx.json({ chatRooms, page }),
+      ctx.json({ chatRooms: sliceChatRooms, page }),
     );
   }),
   rest.get(`${BASE_URL}/company/chatrooms/:id`, (req, res, ctx) => {
-    const { chatRoom, page } = fixtures;
+    const { chatRoom } = fixtures;
 
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
     if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
 
+    const COUNT_UNIT = 20;
+
+    const page = {
+      current: Number(req.url.searchParams.get('page')) || 1,
+      total: Math.ceil(chatRoom.messages.length / COUNT_UNIT) || 1,
+    };
+
+    if (page.current > page.total || page.current < 1 || !Number.isInteger(page.current)) {
+      return res(ctx.status(400), ctx.json({ message: 'Page가 유효하지 않습니다.' }));
+    }
+
+    const start = Number(page.current) * COUNT_UNIT - COUNT_UNIT;
+    chatRoom.messages = chatRoom.messages.slice(start, start + COUNT_UNIT);
+
     return res(
       ctx.status(200),
-      ctx.json({ ...chatRoom, ...page }),
+      ctx.json({ ...chatRoom, page }),
     );
   }),
   rest.get(`${BASE_URL}/auto-replies`, (req, res, ctx) => {
