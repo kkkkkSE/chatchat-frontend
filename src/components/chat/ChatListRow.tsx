@@ -4,6 +4,8 @@ import { ChatRoomSummary } from '../../types';
 
 import transformDate from '../../utils/transformDate';
 
+import ProfileImage from '../ui/ProfileImage';
+
 interface ChatListRowProps {
   chatRoomSummary : ChatRoomSummary;
 }
@@ -16,9 +18,9 @@ function ChatListRow({ chatRoomSummary }: ChatListRowProps) {
   };
 
   return (
-    <ChatListItem>
+    <Container>
       <div>
-        <img
+        <ProfileImage
           src={chatRoomSummary.receiverImageUrl}
           alt={chatRoomSummary.receiverName}
         />
@@ -33,33 +35,34 @@ function ChatListRow({ chatRoomSummary }: ChatListRowProps) {
           {displayUnreadCount(chatRoomSummary.unreadMessageCount)}
         </div>
       </div>
-    </ChatListItem>
+    </Container>
   );
 }
 
-const ChatListItem = styled.li`
+const Container = styled.li`
   width: 100%;
   display: flex;
   align-items: center;
   padding-block: 1.4rem;
+  cursor: pointer;
 
-  > div {
+  > div:nth-child(1) {
+    min-width: 10rem;
+    max-width: 10rem;
+    height: 10rem;
+    margin-right: 2rem;
+  }
+  
+  > div:nth-child(2) {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-
-    img {
-      width: 10rem;
-      height: 10rem;
-      background-color: ${(props) => props.theme.colors.gray2.default};
-      border-radius: 30%;
-      margin-right: 2rem;
-    }
+    flex-grow: 1;
 
     > div:nth-child(1){
       ${(props) => props.theme.alignCenter.vertical}
       align-items: flex-start;
       text-align: left;
+      flex-grow: 1;
 
       b {
         ${(props) => props.theme.texts.bold.title}
@@ -103,21 +106,17 @@ const ChatListItem = styled.li`
     }
   }
 
-  > div:nth-child(2){
-    flex-grow: 1;
-  }
-
   @media screen and (${(props) => props.theme.breakPoint.mobile}) {
     padding-block: 1rem;
     
-    > div {
-      img {
-        width: 6.4rem;
-        height: 6.4rem;
-        object-fit: cover;
-        margin-right: 1.4rem;
-      }
+    > div:nth-child(1) {
+      min-width: 6.4rem;
+      max-width: 6.4rem;
+      height: 6.4rem;
+      margin-right: 1.4rem;
+    }
 
+    > div:nth-child(2){
       > div:nth-child(1){
         b {
           ${(props) => props.theme.texts.bold.boldText}
