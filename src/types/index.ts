@@ -1,15 +1,9 @@
-export interface CompanyProfile {
+export interface Profile {
   id: number;
   name: string;
   description?: string;
   imageUrl: string;
   profileVisibility?: boolean;
-}
-
-export interface CustomerProfile {
-  id: number;
-  name: string;
-  imageUrl: string;
 }
 
 export interface ChatRoomSummary {
