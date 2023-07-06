@@ -3,6 +3,7 @@ import PreLoginLayout from './components/layout/PreLoginLayout';
 import ChatListPage from './pages/ChatListPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage';
 import SignUpPage from './pages/SignUpPage';
 
 const routes = [
@@ -17,6 +18,7 @@ const routes = [
     element: <PostLoginLayout />,
     children: [
       { path: '/chatrooms', element: <ChatListPage /> },
+      { path: '/profile', element: <ProfilePage /> },
     ],
   },
 ];

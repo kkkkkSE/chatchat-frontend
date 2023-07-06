@@ -11,7 +11,7 @@ const TYPES_PLURAL : Record<string, string> = {
 export default class ApiService {
   private instance : AxiosInstance;
 
-  type : string | undefined = localStorage.getItem('userType')?.slice(1, -1);
+  type : string = localStorage.getItem('userType')?.slice(1, -1) || '';
 
   constructor() {
     this.instance = axios.create({
@@ -95,6 +95,12 @@ export default class ApiService {
     page?: number
   }) {
     const { data } = await this.instance.get(`/${this.type}/chatrooms`, { params: { page } });
+
+    return data;
+  }
+
+  async fetchMyProfile() {
+    const { data } = await this.instance.get(`/${TYPES_PLURAL[this.type]}/me`);
 
     return data;
   }

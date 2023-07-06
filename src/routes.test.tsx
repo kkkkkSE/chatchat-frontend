@@ -62,10 +62,18 @@ describe('routes', () => {
 
   describe('after login', () => {
     context('when the current path is “/chatrooms', () => {
-      it('renders <ChatList />', () => {
+      it('renders <ChatListPage />', () => {
         setupRouterProvider('/chatrooms');
 
         expect(screen.getAllByText(/채팅 목록/)).toHaveLength(2);
+      });
+    });
+
+    context('when the current path is “/profile', () => {
+      it('renders <ProfilePage />', () => {
+        setupRouterProvider('/profile');
+
+        expect(screen.getAllByText(/내 프로필/)).toHaveLength(2);
       });
     });
   });
