@@ -65,7 +65,7 @@ describe('routes', () => {
       it('renders <ChatListPage />', () => {
         setupRouterProvider('/chatrooms');
 
-        expect(screen.getAllByText(/채팅 목록/)).toHaveLength(2);
+        screen.getByTestId(/chat-list/);
       });
     });
 
@@ -73,7 +73,7 @@ describe('routes', () => {
       it('renders <ProfilePage />', () => {
         setupRouterProvider('/profile');
 
-        expect(screen.getAllByText(/내 프로필/)).toHaveLength(2);
+        screen.getByTestId(/my-profile/);
       });
     });
   });
