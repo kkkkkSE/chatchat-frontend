@@ -3,7 +3,10 @@ import MyProfile from '../components/profile/MyProfile';
 
 export default function ProfilePage() {
   return (
-    <ContentLayout page="내 프로필">
+    <ContentLayout
+      page="내 프로필"
+      testId="my-profile"
+    >
       <MyProfile />
     </ContentLayout>
   );

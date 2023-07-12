@@ -5,15 +5,17 @@ interface ContentLayoutProps {
   enableBack?: boolean;
   page: string;
   children: React.ReactNode;
+  testId?: string;
 }
 
 export default function ContentLayout({
   enableBack = false,
   page,
   children,
+  testId = undefined,
 }: ContentLayoutProps) {
   return (
-    <Container>
+    <Container data-testid={testId}>
       <NavigationBar enableBack={enableBack}>{page}</NavigationBar>
       {children}
     </Container>
