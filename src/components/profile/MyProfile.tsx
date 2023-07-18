@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { useLocalStorage } from 'usehooks-ts';
-
 import styled from 'styled-components';
 
-import useFetchMyProfile from '../../hooks/useFetchMyProfile';
+import useLoginUserStore from '../../hooks/useLoginUserStore';
 
 import ProfileImage from '../ui/ProfileImage';
 
@@ -12,12 +10,10 @@ import profileEditIcon from '../../assets/image/icon/profile-edit-icon.png';
 import autoReplyIcon from '../../assets/image/icon/auto-reply-edit-icon.png';
 
 export default function MyProfile() {
-  const [userType] = useLocalStorage('userType', '');
-
-  const { isLoading, profile } = useFetchMyProfile();
+  const [{ userType, profile }] = useLoginUserStore();
 
   // TODO : 로딩화면 스켈레톤 적용
-  if (isLoading) {
+  if (!profile) {
     return <p>Loading...</p>;
   }
 
