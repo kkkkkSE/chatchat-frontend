@@ -1,33 +1,51 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import LoginForm from '../components/login/LoginForm';
 
 import useLoginFormStore from '../hooks/useLoginFormStore';
+import useLoginUserStore from '../hooks/useLoginUserStore';
 
 function LoginPage() {
-  const [{ accessToken }, store] = useLoginFormStore();
-
   const navigate = useNavigate();
 
+  const [{ accessToken }, loginFormStore] = useLoginFormStore();
+
+  const [, loginUserStore] = useLoginUserStore();
+
+  const [params] = useSearchParams();
+
+  const userType = params.get('type') || '';
+
   useEffect(() => {
-    store.reset();
+    loginFormStore.reset();
+
+    const validUserTypes = ['company', 'customer'];
+
+    if (!validUserTypes.includes(userType)) {
+      navigate('/');
+    }
   }, []);
 
   useEffect(() => {
     if (accessToken) {
-      store.reset();
+      loginFormStore.reset();
+
+      loginUserStore.setUserType(userType);
+
       navigate('/chatrooms');
     }
   }, [accessToken]);
 
   const handleClickSignUp = () => {
-    navigate('/sign-up');
+    navigate(`/sign-up?type=${userType}`);
   };
 
   return (
     <LoginForm
-      onClickMoveSignUp={handleClickSignUp}
+      userType={userType}
+      handleClickSignUp={handleClickSignUp}
     />
   );
 }

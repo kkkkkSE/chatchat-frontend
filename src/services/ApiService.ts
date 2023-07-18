@@ -11,15 +11,13 @@ const TYPES_PLURAL : Record<string, string> = {
 export default class ApiService {
   private instance : AxiosInstance;
 
-  type : string = localStorage.getItem('userType')?.slice(1, -1) || '';
-
   constructor() {
     this.instance = axios.create({
       baseURL: API_BASE_URL,
     });
 
     this.instance.interceptors.request.use((config) => {
-      if (config.url === '/token' || config.url === '/login') {
+      if (config.url === '/token') {
         config.withCredentials = true;
 
         return config;
@@ -54,18 +52,17 @@ export default class ApiService {
     );
   }
 
-  setType(type:string) {
-    this.type = type;
-  }
-
-  async login({ username, password } : {
+  async login({ type, username, password } : {
+    type: string;
     username: string;
     password: string;
   }) {
     const { data } = await this.instance.post(
-      `/${this.type}/session`,
+      `/${type}/session`,
       { username, password },
+      { withCredentials: true },
     );
+
     const { accessToken } = data;
 
     return accessToken;
@@ -73,9 +70,7 @@ export default class ApiService {
 
   async reissueToken() {
     try {
-      const { data } = await this.instance.post(
-        '/token',
-      );
+      const { data } = await this.instance.post('/token');
 
       const { accessToken } = data;
 
@@ -91,16 +86,19 @@ export default class ApiService {
     }
   }
 
-  async fetchChatList({ page } : {
-    page?: number
+  async fetchLoginUser({ type } : {
+    type: string;
   }) {
-    const { data } = await this.instance.get(`/${this.type}/chatrooms`, { params: { page } });
+    const { data } = await this.instance.get(`/${TYPES_PLURAL[type]}/me`);
 
     return data;
   }
 
-  async fetchMyProfile() {
-    const { data } = await this.instance.get(`/${TYPES_PLURAL[this.type]}/me`);
+  async fetchChatList({ type, page } : {
+    type: string;
+    page?: number;
+  }) {
+    const { data } = await this.instance.get(`/${type}/chatrooms`, { params: { page } });
 
     return data;
   }

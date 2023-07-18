@@ -1,7 +1,8 @@
-import { AxiosError } from 'axios';
 import LoginFormStore from './LoginFormStore';
 
 const context = describe;
+
+const userType = 'company';
 
 const login = jest.fn();
 
@@ -29,7 +30,7 @@ describe('LoginFormStore', () => {
 
     context('empty username', () => {
       it('errorMessage set to "아이디를 입력해주세요"', async () => {
-        await store.login();
+        await store.login(userType);
 
         expect(store.errorMessage).toBe('아이디를 입력해주세요');
       });
@@ -41,7 +42,7 @@ describe('LoginFormStore', () => {
       });
 
       it('errorMessage set to "비밀번호를 입력해주세요"', async () => {
-        await store.login();
+        await store.login(userType);
 
         expect(store.errorMessage).toBe('비밀번호를 입력해주세요');
       });
@@ -54,7 +55,7 @@ describe('LoginFormStore', () => {
       });
 
       it('errorMessage set to empty string', async () => {
-        await store.login();
+        await store.login(userType);
 
         expect(login).toBeCalled();
 
@@ -70,7 +71,7 @@ describe('LoginFormStore', () => {
       });
 
       it('errorMessage set to error message', async () => {
-        await store.login();
+        await store.login(userType);
 
         expect(login).toBeCalled();
 

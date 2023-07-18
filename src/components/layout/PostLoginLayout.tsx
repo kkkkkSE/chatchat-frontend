@@ -1,28 +1,33 @@
 import { useEffect } from 'react';
+
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import useCheckAccessToken from '../../hooks/useCheckAccessToken';
-
-import checkUserType from '../../utils/checkUserType';
+import useAccessToken from '../../hooks/useAccessToken';
+import useCheckLoginUser from '../../hooks/useCheckLoginUser';
+import useLoginUserStore from '../../hooks/useLoginUserStore';
 
 import Header from './Header';
 
 export default function PostLoginLayout() {
   const navigate = useNavigate();
 
-  const validUserType = checkUserType();
+  const [{ userType }, store] = useLoginUserStore();
 
-  const ready = useCheckAccessToken();
+  const { accessToken } = useAccessToken();
+
+  const { validUser } = useCheckLoginUser(userType);
 
   useEffect(() => {
-    if (!validUserType) {
+    if (!accessToken) {
+      store.reset();
+
       navigate('/');
     }
-  }, [navigate]);
+  }, [accessToken]);
 
-  if (!ready) {
+  if (!validUser) {
     return null;
   }
 
