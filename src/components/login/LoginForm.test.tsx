@@ -6,7 +6,9 @@ import LoginForm from './LoginForm';
 
 const context = describe;
 
-const onClickMoveSignUp = jest.fn();
+const userType = 'company';
+
+const handleClickSignUp = jest.fn();
 
 const state = {
   username: '',
@@ -23,7 +25,8 @@ jest.mock('../../hooks/useLoginFormStore', () => () => [state, store]);
 describe('<LoginForm />', () => {
   it('render login form', () => {
     render(<LoginForm
-      onClickMoveSignUp={onClickMoveSignUp}
+      userType={userType}
+      handleClickSignUp={handleClickSignUp}
     />);
 
     screen.getByLabelText(/아이디/);
@@ -36,7 +39,8 @@ describe('<LoginForm />', () => {
   context('click "로그인" button', () => {
     it('validation and login', async () => {
       render(<LoginForm
-        onClickMoveSignUp={onClickMoveSignUp}
+        userType={userType}
+        handleClickSignUp={handleClickSignUp}
       />);
 
       fireEvent.click(screen.getByRole('button', { name: /로그인/ }));
@@ -46,14 +50,15 @@ describe('<LoginForm />', () => {
   });
 
   context('click "회원가입" button', () => {
-    it('execute onClickMoveSignUp function', async () => {
+    it('execute handleClickSignUp function', async () => {
       render(<LoginForm
-        onClickMoveSignUp={onClickMoveSignUp}
+        userType={userType}
+        handleClickSignUp={handleClickSignUp}
       />);
 
       fireEvent.click(screen.getByRole('button', { name: /회원가입/ }));
 
-      expect(onClickMoveSignUp).toHaveBeenCalled();
+      expect(handleClickSignUp).toHaveBeenCalled();
     });
   });
 });

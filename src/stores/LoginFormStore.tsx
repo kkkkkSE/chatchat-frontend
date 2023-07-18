@@ -53,11 +53,12 @@ export default class LoginFormStore {
     }
   }
 
-  async login() {
+  async login(type: string) {
     try {
       this.validate();
 
       const accessToken = await apiService.login({
+        type,
         username: this.username,
         password: this.password,
       });

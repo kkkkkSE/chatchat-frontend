@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
+
 import styled from 'styled-components';
+
 import useAccessToken from '../../hooks/useAccessToken';
 import useLoginFormStore from '../../hooks/useLoginFormStore';
-import Button from '../ui/Button';
-import ErrorMessage from '../ui/ErrorMessage';
-import TextBox from '../ui/TextBox';
 
-interface LoginForm {
-  onClickMoveSignUp: () => void;
+import Button from '../ui/Button';
+import TextBox from '../ui/TextBox';
+import ErrorMessage from '../ui/ErrorMessage';
+
+interface LoginFormProps {
+  userType: string;
+  handleClickSignUp : () => void;
 }
 
 export default function LoginForm({
-  onClickMoveSignUp,
-}: LoginForm) {
+  userType, handleClickSignUp,
+} : LoginFormProps) {
   const { setAccessToken } = useAccessToken();
 
   const [{
@@ -35,7 +39,7 @@ export default function LoginForm({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    store.login();
+    store.login(userType);
   };
 
   return (
@@ -55,7 +59,7 @@ export default function LoginForm({
         <Button
           size="fit"
           color="gray"
-          onClick={onClickMoveSignUp}
+          onClick={handleClickSignUp}
           marginTop
         >
           회원가입

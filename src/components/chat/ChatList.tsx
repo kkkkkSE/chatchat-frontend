@@ -1,6 +1,7 @@
 import { useInView } from 'react-intersection-observer';
 
 import useFetchChatList from '../../hooks/useFetchChatList';
+import useLoginUserStore from '../../hooks/useLoginUserStore';
 
 import { ChatRoomSummary } from '../../types';
 
@@ -9,7 +10,9 @@ import ChatListRow from './ChatListRow';
 export default function ChatList() {
   const [ref, inView] = useInView();
 
-  const { isLoading, data } = useFetchChatList(inView);
+  const [{ userType }] = useLoginUserStore();
+
+  const { isLoading, data } = useFetchChatList(userType, inView);
 
   if (!data) {
     return <p>데이터를 불러올 수 없습니다.</p>;

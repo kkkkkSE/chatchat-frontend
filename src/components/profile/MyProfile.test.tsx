@@ -1,30 +1,28 @@
 import { screen } from '@testing-library/react';
+
 import fixtures from '../../../fixtures';
+
 import { render } from '../../test-helper';
+
 import { Profile } from '../../types';
+
 import MyProfile from './MyProfile';
 
 const context = describe;
 
 const { company, customer } = fixtures;
 
-const user = {
-  type: 'company',
-};
-
-const mockFetchData : {
- isLoading: boolean,
- profile: Profile
+const mockLoginUserData : {
+  userType: string,
+  profile: Profile,
+  loading: boolean,
 } = {
-  isLoading: false,
+  userType: 'company',
   profile: company,
+  loading: false,
 };
 
-jest.mock('../../hooks/useFetchMyProfile', () => () => mockFetchData);
-
-jest.mock('usehooks-ts', () => ({
-  useLocalStorage: () => [user.type],
-}));
+jest.mock('../../hooks/useLoginUserStore', () => () => [mockLoginUserData]);
 
 describe('<MyProfile />', () => {
   context('user type is company', () => {
@@ -38,8 +36,8 @@ describe('<MyProfile />', () => {
 
   context('user type is customer', () => {
     beforeEach(() => {
-      user.type = 'customer';
-      mockFetchData.profile = customer;
+      mockLoginUserData.userType = 'customer';
+      mockLoginUserData.profile = customer;
     });
 
     it('render a logged in customer profile ', () => {

@@ -40,3 +40,9 @@ export interface autoReply{
   question: string;
   answer: string;
 }
+
+export const nullProfile = {
+  id: 0,
+  name: '',
+  imageUrl: '',
+};

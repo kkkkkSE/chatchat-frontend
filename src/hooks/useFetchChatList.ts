@@ -4,12 +4,12 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { apiService } from '../services/ApiService';
 
-const useFetchChatList = (trigger: boolean) => {
+const useFetchChatList = (type: string, trigger: boolean) => {
   const {
     isLoading, data, isPreviousData, fetchNextPage,
   } = useInfiniteQuery(
     ['chatList'],
-    ({ pageParam = 1 }) => apiService.fetchChatList({ page: pageParam }),
+    ({ pageParam = 1 }) => apiService.fetchChatList({ type, page: pageParam }),
     {
       getNextPageParam: (lastPage) => {
         const cur = lastPage.page.current;
