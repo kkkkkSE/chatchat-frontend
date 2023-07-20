@@ -86,20 +86,35 @@ export default class ApiService {
     }
   }
 
-  async fetchLoginUser({ type } : {
-    type: string;
-  }) {
-    const { data } = await this.instance.get(`/${TYPES_PLURAL[type]}/me`);
-
-    return data;
-  }
-
   async fetchChatList({ type, page } : {
     type: string;
     page?: number;
   }) {
-    const { data } = await this.instance.get(`/${type}/chatrooms`, { params: { page } });
+    const { data } = await this.instance.get(
+      `/${type}/chatrooms`,
+      { params: { page } },
+    );
 
+    return data;
+  }
+
+  async fetchChatRoom({ type, id, page } : {
+    type: string;
+    id: number;
+    page?: number;
+  }) {
+    const { data } = await this.instance.get(
+      `/${type}/chatrooms/${id}`,
+      { params: { page } },
+    );
+
+    return data;
+  }
+
+  async fetchLoginUser({ type } : {
+    type: string;
+  }) {
+    const { data } = await this.instance.get(`/${TYPES_PLURAL[type]}/me`);
     return data;
   }
 }
