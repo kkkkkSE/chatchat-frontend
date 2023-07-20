@@ -132,7 +132,7 @@ const customerHandlers = [
     );
   }),
   rest.get(`${BASE_URL}/customer/chatrooms/:id`, (req, res, ctx) => {
-    const { chatRoom } = fixtures;
+    const chatRoom = { ...fixtures.chatRoom };
 
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
@@ -150,8 +150,9 @@ const customerHandlers = [
       return res(ctx.status(400), ctx.json({ message: 'Page가 유효하지 않습니다.' }));
     }
 
-    const start = Number(page.current) * COUNT_UNIT - COUNT_UNIT;
-    chatRoom.messages = chatRoom.messages.slice(start, start + COUNT_UNIT);
+    const end = chatRoom.messages.length - (COUNT_UNIT * (page.current - 1));
+    const start = (end - COUNT_UNIT) >= 0 ? end - COUNT_UNIT : 0;
+    chatRoom.messages = chatRoom.messages.slice(start, end);
 
     return res(
       ctx.status(200),

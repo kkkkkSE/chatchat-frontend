@@ -1,8 +1,10 @@
 import {
-  format, isToday, isThisYear, parse,
+  format, parse, isThisYear, isToday,
 } from 'date-fns';
 
-const formatDate = (dateString : string) => {
+const formatDateAuto = (
+  dateString : string,
+) => {
   const date = parse(dateString, 'yyyy.MM.dd HH:mm:ss', new Date());
 
   if (isToday(date)) {
@@ -18,4 +20,4 @@ const formatDate = (dateString : string) => {
   return format(date, 'yyyy년 M월 d일');
 };
 
-export default formatDate;
+export default formatDateAuto;

@@ -12,7 +12,6 @@ import defaultTheme from './styles/defaultTheme';
 
 const queryClient = new QueryClient();
 
-// eslint-disable-next-line import/prefer-default-export
 export function render(element: React.ReactElement) {
   return originalRender((
     <MemoryRouter initialEntries={['/']}>
@@ -24,3 +23,15 @@ export function render(element: React.ReactElement) {
     </MemoryRouter>
   ));
 }
+
+export const mockIntersectionObserver = () => {
+  const intersectionObserver = jest.fn();
+
+  intersectionObserver.mockReturnValue({
+    observe: () => null,
+    unobserve: () => null,
+    disconnect: () => null,
+  });
+
+  window.IntersectionObserver = intersectionObserver;
+};

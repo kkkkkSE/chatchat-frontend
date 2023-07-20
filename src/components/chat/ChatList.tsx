@@ -1,5 +1,7 @@
 import { useInView } from 'react-intersection-observer';
 
+import { useNavigate } from 'react-router-dom';
+
 import useFetchChatList from '../../hooks/useFetchChatList';
 import useLoginUserStore from '../../hooks/useLoginUserStore';
 
@@ -8,6 +10,8 @@ import { ChatRoomSummary } from '../../types';
 import ChatListRow from './ChatListRow';
 
 export default function ChatList() {
+  const navigate = useNavigate();
+
   const [ref, inView] = useInView();
 
   const [{ userType }] = useLoginUserStore();
@@ -28,6 +32,10 @@ export default function ChatList() {
     return <p>진행중인 대화가 없습니다.</p>;
   }
 
+  const handleClickChatRoom = (id: number) => {
+    navigate(`/chatrooms/${id}`);
+  };
+
   return (
     <div>
       <ul>
@@ -35,6 +43,7 @@ export default function ChatList() {
           <ChatListRow
             key={chatRoom.id + chatRoom.receiverName}
             chatRoom={chatRoom}
+            handleClickChatRoom={handleClickChatRoom}
           />
         )))}
 

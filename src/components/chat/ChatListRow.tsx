@@ -2,15 +2,18 @@ import styled from 'styled-components';
 
 import { ChatRoomSummary } from '../../types';
 
-import transformDate from '../../utils/transformDate';
+import formatDateAuto from '../../utils/date/formatDateAuto';
 
 import ProfileImage from '../ui/ProfileImage';
 
 interface ChatListRowProps {
   chatRoom : ChatRoomSummary;
+  handleClickChatRoom : (id: number) => void;
 }
 
-function ChatListRow({ chatRoom }: ChatListRowProps) {
+export default function ChatListRow({
+  chatRoom, handleClickChatRoom,
+}: ChatListRowProps) {
   const displayUnreadCount = (count: number) => {
     if (count > 999) return <span>+999</span>;
     if (count > 0) return <span>{count}</span>;
@@ -18,7 +21,7 @@ function ChatListRow({ chatRoom }: ChatListRowProps) {
   };
 
   return (
-    <Container>
+    <Container onClick={() => handleClickChatRoom(chatRoom.id)}>
       <div>
         <ProfileImage
           src={chatRoom.receiverImageUrl}
@@ -31,7 +34,7 @@ function ChatListRow({ chatRoom }: ChatListRowProps) {
           <p>{chatRoom.lastMessage}</p>
         </div>
         <div>
-          <small>{transformDate(chatRoom.lastMessageDate)}</small>
+          <small>{formatDateAuto(chatRoom.lastMessageDate)}</small>
           {displayUnreadCount(chatRoom.unreadMessageCount)}
         </div>
       </div>
@@ -145,5 +148,3 @@ const Container = styled.li`
     }
   }
 `;
-
-export default ChatListRow;
