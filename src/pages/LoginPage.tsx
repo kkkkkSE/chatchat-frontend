@@ -5,11 +5,14 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import LoginForm from '../components/login/LoginForm';
 
 import useLoginFormStore from '../hooks/useLoginFormStore';
+import useLoginUserStore from '../hooks/useLoginUserStore';
 
 function LoginPage() {
   const navigate = useNavigate();
 
   const [{ accessToken }, loginFormStore] = useLoginFormStore();
+
+  const [, loginUserStore] = useLoginUserStore();
 
   const [params] = useSearchParams();
 
@@ -30,6 +33,8 @@ function LoginPage() {
       loginFormStore.reset();
 
       localStorage.setItem('userType', userType);
+
+      loginUserStore.setUserType(userType);
 
       navigate('/chatrooms');
     }
