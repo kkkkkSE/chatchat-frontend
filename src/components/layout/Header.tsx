@@ -8,7 +8,20 @@ import chatListIcon from '../../assets/image/icon/chat-list-icon.png';
 import accountIcon from '../../assets/image/icon/account-icon.png';
 import logoutIcon from '../../assets/image/icon/logout-icon.png';
 
+import { apiService } from '../../services/ApiService';
+import useLoginUserStore from '../../hooks/useLoginUserStore';
+
 export default function Header() {
+  const [, store] = useLoginUserStore();
+
+  const handleClickLogout = async () => {
+    localStorage.clear();
+
+    store.reset();
+
+    await apiService.logout();
+  };
+
   return (
     <Container>
       <h2>CHATCHAT</h2>
@@ -33,7 +46,10 @@ export default function Header() {
             <img src={accountIcon} alt="" />
             <span>계정 관리</span>
           </NavLink>
-          <NavLink to="/">
+          <NavLink
+            to="/"
+            onClick={handleClickLogout}
+          >
             <img src={logoutIcon} alt="" />
             <span>로그아웃</span>
           </NavLink>

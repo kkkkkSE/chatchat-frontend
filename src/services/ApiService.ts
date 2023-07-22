@@ -17,7 +17,7 @@ export default class ApiService {
     });
 
     this.instance.interceptors.request.use((config) => {
-      if (config.url === '/token') {
+      if (config.url === '/token' || config.url === '/logout') {
         config.withCredentials = true;
 
         return config;
@@ -66,6 +66,10 @@ export default class ApiService {
     const { accessToken } = data;
 
     return accessToken;
+  }
+
+  async logout() {
+    await this.instance.delete('/logout');
   }
 
   async reissueToken() {
