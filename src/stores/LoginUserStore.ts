@@ -9,7 +9,7 @@ import { nullProfile, Profile } from '../types';
 @singleton()
 @Store()
 export default class LoginUserStore {
-  userType = localStorage.getItem('userType') || '';
+  userType = '';
 
   profile : Profile = nullProfile;
 
@@ -26,6 +26,11 @@ export default class LoginUserStore {
   setLoginUser(profile : Profile) {
     this.profile = profile;
     this.error = false;
+  }
+
+  @Action()
+  setUserType(userType: string) {
+    this.userType = userType;
   }
 
   @Action()
