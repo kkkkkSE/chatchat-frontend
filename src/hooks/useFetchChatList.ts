@@ -18,6 +18,7 @@ const useFetchChatList = (type: string, trigger: boolean) => {
         }
         return undefined;
       },
+      cacheTime: 0,
     },
   );
 
