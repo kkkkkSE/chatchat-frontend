@@ -16,10 +16,12 @@ export default function ChatRoomPage() {
 
   // TODO : chatRoomId 없을 때 not found 페이지 이동
   if (!chatRoomId) {
-    return <div><p>Not Found</p></div>;
+    return (
+      <div>
+        <p>Not Found</p>
+      </div>
+    );
   }
-
-  const [{ receiverName, loading, page }, store] = useChatRoomStore();
 
   useEffect(() => {
     store.fetchChatRoom(userType, chatRoomId);
@@ -29,6 +31,20 @@ export default function ChatRoomPage() {
     };
   }, []);
 
+  const [{
+    receiverName, loading, page, error,
+  }, store] = useChatRoomStore();
+
+  // TODO : Error Page로 이동하기
+  if (error) {
+    return (
+      <div>
+        <p>데이터를 불러올 수 없습니다.</p>
+      </div>
+    );
+  }
+
+  // TODO : 로딩화면 스켈레톤 적용
   return (
     <ContentLayout
       enableBack

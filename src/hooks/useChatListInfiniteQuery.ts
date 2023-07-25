@@ -12,7 +12,7 @@ const useChatListInfiniteQuery = (type: string) => {
   const [ref, inView] = useInView();
 
   const {
-    isLoading, data, isPreviousData, fetchNextPage,
+    isLoading, data, isPreviousData, fetchNextPage, error,
   } = useInfiniteQuery(
     QUERY_KEY.CHAT_LIST,
     ({ pageParam = 1 }) => apiService.fetchChatList({ type, page: pageParam }),
@@ -34,7 +34,12 @@ const useChatListInfiniteQuery = (type: string) => {
     }
   }, [inView]);
 
-  return { ref, isLoading, data };
+  return {
+    ref,
+    isLoading,
+    data: data ?? { pages: [] },
+    error,
+  };
 };
 
 export default useChatListInfiniteQuery;
