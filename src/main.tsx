@@ -9,6 +9,7 @@ import { Reset } from 'styled-reset';
 import { ThemeProvider } from 'styled-components';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import routes from './routes';
 
 import defaultTheme from './styles/defaultTheme';

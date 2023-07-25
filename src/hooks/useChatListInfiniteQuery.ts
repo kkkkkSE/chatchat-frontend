@@ -2,13 +2,19 @@ import { useEffect } from 'react';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { useInView } from 'react-intersection-observer';
+
 import { apiService } from '../services/ApiService';
 
-const useFetchChatList = (type: string, trigger: boolean) => {
+import { QUERY_KEY } from '../constants/reactQuery';
+
+const useChatListInfiniteQuery = (type: string) => {
+  const [ref, inView] = useInView();
+
   const {
     isLoading, data, isPreviousData, fetchNextPage,
   } = useInfiniteQuery(
-    ['chatList'],
+    QUERY_KEY.CHAT_LIST,
     ({ pageParam = 1 }) => apiService.fetchChatList({ type, page: pageParam }),
     {
       getNextPageParam: (lastPage) => {
@@ -23,12 +29,12 @@ const useFetchChatList = (type: string, trigger: boolean) => {
   );
 
   useEffect(() => {
-    if (!isPreviousData && trigger) {
+    if (!isPreviousData && inView) {
       fetchNextPage();
     }
-  }, [trigger]);
+  }, [inView]);
 
-  return { isLoading, data };
+  return { ref, isLoading, data };
 };
 
-export default useFetchChatList;
+export default useChatListInfiniteQuery;

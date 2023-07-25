@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { ChatRoomSummary } from '../../types';
+import displayUnreadCount from '../../utils/chat/displayUnreadCount';
 
 import formatDateAuto from '../../utils/date/formatDateAuto';
 
@@ -14,28 +15,30 @@ interface ChatListRowProps {
 export default function ChatListRow({
   chatRoom, handleClickChatRoom,
 }: ChatListRowProps) {
-  const displayUnreadCount = (count: number) => {
-    if (count > 999) return <span>+999</span>;
-    if (count > 0) return <span>{count}</span>;
-    return null;
-  };
+  const {
+    receiverName, receiverImageUrl, lastMessage, lastMessageDate, unreadMessageCount,
+  } = chatRoom;
+
+  const unreadCount = displayUnreadCount(unreadMessageCount);
 
   return (
     <Container onClick={() => handleClickChatRoom(chatRoom.id)}>
       <div>
         <ProfileImage
-          src={chatRoom.receiverImageUrl}
-          alt={chatRoom.receiverName}
+          src={receiverImageUrl}
+          alt={receiverName}
         />
       </div>
       <div>
         <div>
-          <b>{chatRoom.receiverName}</b>
-          <p>{chatRoom.lastMessage}</p>
+          <b>{receiverName}</b>
+          <p>{lastMessage}</p>
         </div>
         <div>
-          <small>{formatDateAuto(chatRoom.lastMessageDate)}</small>
-          {displayUnreadCount(chatRoom.unreadMessageCount)}
+          <small>{formatDateAuto(lastMessageDate)}</small>
+          {unreadCount && (
+            <span>{unreadCount}</span>
+          )}
         </div>
       </div>
     </Container>

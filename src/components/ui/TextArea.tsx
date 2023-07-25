@@ -3,7 +3,7 @@ import React, { forwardRef, useCallback } from 'react';
 
 import styled from 'styled-components';
 
-interface TextareaProps {
+interface TextAreaProps {
   value: string;
   placeholder?: string;
   maxLength?: number;
@@ -11,7 +11,7 @@ interface TextareaProps {
   onKeyPress?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
-const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({
   value, placeholder, maxLength, onKeyPress, onChange,
 }, ref) => {
   const handleResizeHeight = useCallback(() => {
@@ -28,9 +28,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     handleResizeHeight();
 
-    if (onChange) {
-      onChange(event);
-    }
+    onChange?.(event);
   };
 
   return (

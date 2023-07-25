@@ -4,6 +4,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import LoginForm from '../components/login/LoginForm';
 
+import { STATIC_ROUTES } from '../constants/routes';
+
 import useLoginFormStore from '../hooks/useLoginFormStore';
 import useLoginUserStore from '../hooks/useLoginUserStore';
 
@@ -24,7 +26,7 @@ function LoginPage() {
     const validUserTypes = ['company', 'customer'];
 
     if (!validUserTypes.includes(userType)) {
-      navigate('/');
+      navigate(STATIC_ROUTES.HOME);
     }
   }, []);
 
@@ -36,12 +38,12 @@ function LoginPage() {
 
       loginUserStore.setUserType(userType);
 
-      navigate('/chatrooms');
+      navigate(STATIC_ROUTES.CHATROOMS);
     }
   }, [accessToken]);
 
   const handleClickSignUp = () => {
-    navigate(`/sign-up?type=${userType}`);
+    navigate(`${STATIC_ROUTES.SIGN_UP}?type=${userType}`);
   };
 
   return (

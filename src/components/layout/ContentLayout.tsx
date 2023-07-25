@@ -1,22 +1,23 @@
 import styled from 'styled-components';
+
 import NavigationBar from '../ui/NavigationBar';
 
 interface ContentLayoutProps {
   enableBack?: boolean;
-  page: string;
+  pageHeader: string;
   children: React.ReactNode;
   testId?: string;
 }
 
 export default function ContentLayout({
   enableBack = false,
-  page,
+  pageHeader,
   children,
   testId = undefined,
 }: ContentLayoutProps) {
   return (
     <Container data-testid={testId}>
-      <NavigationBar enableBack={enableBack}>{page}</NavigationBar>
+      <NavigationBar enableBack={enableBack}>{pageHeader}</NavigationBar>
       {children}
     </Container>
   );

@@ -12,7 +12,7 @@ export default function ChatRoomPage() {
   const [{ userType }] = useLoginUserStore();
 
   const params = useParams();
-  const chatRoomId = Number(params.chatRoomId);
+  const chatRoomId = Number(params.id);
 
   // TODO : chatRoomId 없을 때 not found 페이지 이동
   if (!chatRoomId) {
@@ -32,7 +32,7 @@ export default function ChatRoomPage() {
   return (
     <ContentLayout
       enableBack
-      page={receiverName}
+      pageHeader={receiverName}
       testId={`chat-room-${chatRoomId}`}
     >
       {loading && page === 1 ? (

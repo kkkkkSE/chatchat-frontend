@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/consistent-type-imports */
-/* eslint-disable @typescript-eslint/triple-slash-reference */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
 /// <reference types='codeceptjs' />
 type StepsFile = typeof import('./steps_file.js');
 

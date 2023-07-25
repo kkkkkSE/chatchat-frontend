@@ -3,6 +3,8 @@ import { rest } from 'msw';
 
 import fixtures from '../../../fixtures';
 
+import { VALID_ACCESS_TOKEN, VALID_REFRESH_TOKEN } from '../../../fixtures/constants';
+
 import isValidAccessToken from '../isValidAccessToken';
 
 const BASE_URL = process.env.API_BASE_URL;
@@ -14,8 +16,8 @@ const customerHandlers = [
     if (username === 'customer1' && password === 'Password1234!') {
       return res(
         ctx.status(201),
-        ctx.json({ accessToken: 'VALIDACCESSTOKEN' }),
-        ctx.cookie('refreshToken', 'VALIDREFRESHTOKEN'),
+        ctx.json({ accessToken: VALID_ACCESS_TOKEN }),
+        ctx.cookie('refreshToken', VALID_REFRESH_TOKEN),
       );
     }
 

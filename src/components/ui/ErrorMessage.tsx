@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 type ErrorMessageProps = {
-  children: string;
+  children: React.ReactNode;
 };
 function ErrorMessage({ children }: ErrorMessageProps) {
   return (
-    <StyledErrorMessage>
+    <Container>
       {children}
-    </StyledErrorMessage>
+    </Container>
   );
 }
 
 export default ErrorMessage;
 
-const StyledErrorMessage = styled.p`
+const Container = styled.p`
     ${(props) => props.theme.texts.regular.small}
     color: ${(props) => props.theme.colors.accent.default};
     padding-block: 1.2rem;

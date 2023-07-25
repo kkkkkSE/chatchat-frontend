@@ -4,7 +4,7 @@ import MyProfile from '../components/profile/MyProfile';
 export default function ProfilePage() {
   return (
     <ContentLayout
-      page="내 프로필"
+      pageHeader="내 프로필"
       testId="my-profile"
     >
       <MyProfile />

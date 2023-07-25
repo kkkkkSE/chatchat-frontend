@@ -1,4 +1,5 @@
 import { singleton } from 'tsyringe';
+
 import { Action, Store } from 'usestore-ts';
 
 import { AxiosError } from 'axios';
@@ -46,9 +47,9 @@ export default class LoginFormStore {
 
   @Action()
   validate() {
-    if (this.username.length < 1) {
+    if (this.username.length === 0) {
       throw new Error('아이디를 입력해주세요');
-    } else if (this.password.length < 1) {
+    } else if (this.password.length === 0) {
       throw new Error('비밀번호를 입력해주세요');
     }
   }

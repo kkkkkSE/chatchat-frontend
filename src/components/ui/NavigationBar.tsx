@@ -6,7 +6,7 @@ import backIcon from '../../assets/image/icon/back-icon.png';
 
 interface NavigationBar {
   enableBack?: boolean;
-  children: string;
+  children: React.ReactNode;
 }
 
 function NavigationBar({
@@ -14,12 +14,17 @@ function NavigationBar({
   children,
 }: NavigationBar) {
   const navigate = useNavigate();
+
+  const handleClickBack = () => {
+    navigate(-1);
+  };
+
   return (
     <Container>
       {enableBack && (
         <button
           type="button"
-          onClick={() => navigate(-1)}
+          onClick={handleClickBack}
         >
           <img src={backIcon} alt="이전 페이지" />
         </button>
