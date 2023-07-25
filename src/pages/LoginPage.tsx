@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import LoginForm from '../components/login/LoginForm';
 
+import { LOCAL_STORAGE_KEYS } from '../constants/localStorage';
 import { STATIC_ROUTES } from '../constants/routes';
 
 import useLoginFormStore from '../hooks/useLoginFormStore';
@@ -34,7 +35,7 @@ function LoginPage() {
     if (accessToken) {
       loginFormStore.reset();
 
-      localStorage.setItem('userType', userType);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.USER_TYPE, userType);
 
       loginUserStore.setUserType(userType);
 
