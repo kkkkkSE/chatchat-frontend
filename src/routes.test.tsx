@@ -15,6 +15,8 @@ import { VALID_ACCESS_TOKEN } from '../fixtures/constants';
 
 import { DYNAMIC_ROUTES, STATIC_ROUTES } from './constants/routes';
 
+import { nullProfile } from './types';
+
 const context = describe;
 
 const queryClient = new QueryClient();
@@ -43,7 +45,10 @@ const user = {
   type: 'company',
 };
 
-jest.mock('./hooks/useLoginUserStore', () => () => [{ userType: user.type }]);
+jest.mock('./hooks/useLoginUserStore', () => () => [{
+  userType: user.type,
+  profile: nullProfile,
+}]);
 
 jest.mock('./hooks/useCheckLoginUser', () => () => ({ validUser: true }));
 

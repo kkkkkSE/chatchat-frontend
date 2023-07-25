@@ -14,12 +14,16 @@ export default function ChatList() {
 
   const [{ userType }] = useLoginUserStore();
 
-  const { ref, isLoading, data } = useChatListInfiniteQuery(userType);
+  const {
+    ref, isLoading, data, error,
+  } = useChatListInfiniteQuery(userType);
 
-  if (!data) {
+  // TODO : Error Page로 이동하기
+  if (error) {
     return <p>데이터를 불러올 수 없습니다.</p>;
   }
 
+  // TODO : 로딩화면 스켈레톤 적용
   if (isLoading) {
     return <p>Loading...</p>;
   }
