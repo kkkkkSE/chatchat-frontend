@@ -2,6 +2,8 @@ import { singleton } from 'tsyringe';
 
 import { Action, Store } from 'usestore-ts';
 
+import { LOCAL_STORAGE_KEYS } from '../constants/localStorage';
+
 import { apiService } from '../services/ApiService';
 
 import { nullProfile, Profile } from '../types';
@@ -9,7 +11,7 @@ import { nullProfile, Profile } from '../types';
 @singleton()
 @Store()
 export default class LoginUserStore {
-  userType = '';
+  userType = localStorage.getItem(LOCAL_STORAGE_KEYS.USER_TYPE) || '';
 
   profile : Profile = nullProfile;
 
