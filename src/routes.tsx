@@ -1,5 +1,8 @@
 import PostLoginLayout from './components/layout/PostLoginLayout';
 import PreLoginLayout from './components/layout/PreLoginLayout';
+
+import { STATIC_ROUTES } from './constants/routes';
+
 import ChatListPage from './pages/ChatListPage';
 import ChatRoomPage from './pages/ChatRoomPage';
 import HomePage from './pages/HomePage';
@@ -11,16 +14,16 @@ const routes = [
   {
     element: <PreLoginLayout />,
     children: [
-      { path: '/', element: <HomePage /> },
-      { path: '/login', element: <LoginPage /> },
-      { path: '/sign-up', element: <SignUpPage /> },
+      { path: STATIC_ROUTES.HOME, element: <HomePage /> },
+      { path: STATIC_ROUTES.LOGIN, element: <LoginPage /> },
+      { path: STATIC_ROUTES.SIGN_UP, element: <SignUpPage /> },
     ],
   }, {
     element: <PostLoginLayout />,
     children: [
-      { path: '/chatrooms', element: <ChatListPage /> },
-      { path: '/chatrooms/:chatRoomId', element: <ChatRoomPage /> },
-      { path: '/profile', element: <ProfilePage /> },
+      { path: STATIC_ROUTES.CHATROOMS, element: <ChatListPage /> },
+      { path: `${STATIC_ROUTES.CHATROOMS}/:id`, element: <ChatRoomPage /> },
+      { path: STATIC_ROUTES.MY_PROFILE, element: <ProfilePage /> },
     ],
   },
 ];

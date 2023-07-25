@@ -6,6 +6,7 @@ import company from './company';
 import customer from './customer';
 import messages from './messages';
 import page from './page';
+import * as constants from './constants';
 
 export default {
   company,
@@ -16,4 +17,5 @@ export default {
   messages,
   autoReplies,
   page,
+  constants,
 };

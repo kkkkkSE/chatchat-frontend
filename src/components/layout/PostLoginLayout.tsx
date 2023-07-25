@@ -4,6 +4,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import { STATIC_ROUTES } from '../../constants/routes';
+
 import useAccessToken from '../../hooks/useAccessToken';
 import useCheckLoginUser from '../../hooks/useCheckLoginUser';
 import useLoginUserStore from '../../hooks/useLoginUserStore';
@@ -23,7 +25,7 @@ export default function PostLoginLayout() {
     if (!accessToken) {
       store.reset();
 
-      navigate('/');
+      navigate(STATIC_ROUTES.HOME);
     }
   }, [accessToken]);
 

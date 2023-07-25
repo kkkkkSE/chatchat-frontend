@@ -11,6 +11,10 @@ import routes from './routes';
 
 import defaultTheme from './styles/defaultTheme';
 
+import { VALID_ACCESS_TOKEN } from '../fixtures/constants';
+
+import { DYNAMIC_ROUTES, STATIC_ROUTES } from './constants/routes';
+
 const context = describe;
 
 const queryClient = new QueryClient();
@@ -27,7 +31,7 @@ const setupRouterProvider = (path: string) => {
   );
 };
 
-const accessToken = 'VALIDACCESSTOKEN';
+const accessToken = VALID_ACCESS_TOKEN;
 
 jest.mock('usehooks-ts', () => ({
   useLocalStorage: () => (
@@ -47,7 +51,7 @@ describe('routes', () => {
   describe('before login', () => {
     context('when the current path is "/"', () => {
       it('renders <HomePage />', () => {
-        setupRouterProvider('/');
+        setupRouterProvider(STATIC_ROUTES.HOME);
 
         screen.getByText(/회원 유형을 선택해주세요/);
       });
@@ -56,7 +60,7 @@ describe('routes', () => {
     describe('when the current path is "/login"', () => {
       context('without user type', () => {
         it('redirect to home page', () => {
-          setupRouterProvider('/login');
+          setupRouterProvider(STATIC_ROUTES.LOGIN);
 
           screen.getByText(/회원 유형을 선택해주세요/);
         });
@@ -64,7 +68,7 @@ describe('routes', () => {
 
       context('with user type', () => {
         it('renders <LoginPage />', () => {
-          setupRouterProvider(`/login?type=${user.type}`);
+          setupRouterProvider(`${STATIC_ROUTES.LOGIN}?type=${user.type}`);
 
           screen.getByLabelText(/아이디/);
           screen.getByRole('button', { name: /로그인/ });
@@ -77,7 +81,7 @@ describe('routes', () => {
     // describe('when the current path is "/sign-up"', () => {
     //   context('without user type', () => {
     //     it('redirect to home page', () => {
-    //       setupRouterProvider('/sign-up');
+    //       setupRouterProvider(STATIC_ROUTES.SIGN_UP);
 
     //       screen.getByText(/회원 유형을 선택해주세요/);
     //     });
@@ -85,7 +89,7 @@ describe('routes', () => {
 
     //   context('with user type', () => {
     //     it('renders <SignUpPage />', () => {
-    //       setupRouterProvider(`/sign-up?type=${user.type}`);
+    //       setupRouterProvider(`${STATIC_ROUTES.SIGN_UP)}?type=${user.type}`);
 
     //       screen.getByLabelText(/비밀번호 확인/);
     //       screen.getByRole('button', { name: /가입하기/ });
@@ -97,17 +101,17 @@ describe('routes', () => {
   describe('after login', () => {
     context('when the current path is "/chatrooms', () => {
       it('renders <ChatListPage />', () => {
-        setupRouterProvider('/chatrooms');
+        setupRouterProvider(STATIC_ROUTES.CHATROOMS);
 
         screen.getByTestId(/chat-list/);
       });
     });
 
-    context('when the current path is “/chatrooms/:chatRoomId', () => {
+    context('when the current path is “/chatrooms/:id', () => {
       it('renders <ChatRoomPage />', () => {
         const chatRoomId = 1;
 
-        setupRouterProvider(`/chatrooms/${chatRoomId}`);
+        setupRouterProvider(DYNAMIC_ROUTES.CHATROOM(chatRoomId));
 
         screen.getByTestId(`chat-room-${chatRoomId}`);
       });
@@ -115,7 +119,7 @@ describe('routes', () => {
 
     context('when the current path is “/profile', () => {
       it('renders <ProfilePage />', () => {
-        setupRouterProvider('/profile');
+        setupRouterProvider(STATIC_ROUTES.MY_PROFILE);
 
         screen.getByTestId(/my-profile/);
       });

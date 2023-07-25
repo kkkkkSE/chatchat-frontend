@@ -20,11 +20,7 @@ export default function TextBox({
   readOnly = false,
 }: TextBoxProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!onChange) {
-      return;
-    }
-
-    onChange(event.target.value);
+    onChange?.(event.target.value);
   };
 
   return (

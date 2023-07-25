@@ -1,9 +1,11 @@
+import { STATIC_ROUTES } from '../../src/constants/routes';
+
 import backdoor from '../backdoor';
 
 Feature('로그인');
 
 Scenario('회원 유형 선택 화면', ({ I }) => {
-  I.amOnPage('/');
+  I.amOnPage(STATIC_ROUTES.HOME);
 
   I.see('회원 유형을 선택해주세요');
 });
@@ -13,7 +15,7 @@ Scenario('회원 유형 선택 화면', ({ I }) => {
 // Scenario('기업으로 로그인', ({ I }) => {
 //   backdoor.setupCompanyDatabase();
 
-//   I.amOnPage('/');
+//   I.amOnPage(STATIC_ROUTES.HOME);
 
 //   I.click('기업');
 
@@ -28,7 +30,7 @@ Scenario('회원 유형 선택 화면', ({ I }) => {
 // Scenario('고객으로 로그인', ({ I }) => {
 //   backdoor.setupCustomerDatabase();
 
-//   I.amOnPage('/');
+//   I.amOnPage(STATIC_ROUTES.HOME);
 
 //   I.click('고객');
 
@@ -41,7 +43,7 @@ Scenario('회원 유형 선택 화면', ({ I }) => {
 // });
 
 Scenario('로그인 시 아이디 공백 (기업/고객 공통)', ({ I }) => {
-  I.amOnPage('/');
+  I.amOnPage(STATIC_ROUTES.HOME);
 
   I.click('기업');
 
@@ -53,7 +55,7 @@ Scenario('로그인 시 아이디 공백 (기업/고객 공통)', ({ I }) => {
 });
 
 Scenario('로그인 시 비밀번호 공백 (기업/고객 공통)', ({ I }) => {
-  I.amOnPage('/');
+  I.amOnPage(STATIC_ROUTES.HOME);
 
   I.click('기업');
 
@@ -67,7 +69,7 @@ Scenario('로그인 시 비밀번호 공백 (기업/고객 공통)', ({ I }) => 
 // TODO : 실제 서버 사용 시 주석 해제(현재는 목업 서버 사용)
 
 // Scenario('틀린 비밀번호 입력 (기업/고객 공통)', ({ I }) => {
-//   I.amOnPage('/');
+//   I.amOnPage(STATIC_ROUTES.HOME);
 
 //   I.click('고객');
 
@@ -80,7 +82,7 @@ Scenario('로그인 시 비밀번호 공백 (기업/고객 공통)', ({ I }) => 
 // });
 
 // Scenario('다른 유형에서는 로그인할 수 없음', ({ I }) => {
-//   I.amOnPage('/');
+//   I.amOnPage(STATIC_ROUTES.HOME);
 
 //   I.click('기업');
 

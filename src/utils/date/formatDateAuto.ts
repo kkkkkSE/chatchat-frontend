@@ -3,9 +3,9 @@ import {
 } from 'date-fns';
 
 const formatDateAuto = (
-  dateString : string,
+  dateParam : string,
 ) => {
-  const date = parse(dateString, 'yyyy.MM.dd HH:mm:ss', new Date());
+  const date = parse(dateParam, 'yyyy.MM.dd HH:mm:ss', new Date());
 
   if (isToday(date)) {
     return format(date, 'a') === 'PM'

@@ -1,9 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
+
 import Button from '../components/ui/Button';
 import TextBox from '../components/ui/TextBox';
 
 function SignUpPage() {
   const [searchParams] = useSearchParams();
+
   const userType = searchParams.get('type');
 
   return (

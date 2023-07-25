@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Gmarket Sans';

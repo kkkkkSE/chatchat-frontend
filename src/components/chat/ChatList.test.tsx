@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+
 import fixtures from '../../../fixtures';
 
 import { render } from '../../test-helper';
@@ -7,7 +8,7 @@ import ChatList from './ChatList';
 
 const context = describe;
 
-const mockFetchData = {
+const mockQueryData = {
   isLoading: false,
   data: {
     pages: [{
@@ -17,7 +18,7 @@ const mockFetchData = {
   },
 };
 
-jest.mock('../../hooks/useFetchChatList', () => () => mockFetchData);
+jest.mock('../../hooks/useChatListInfiniteQuery', () => () => mockQueryData);
 
 jest.mock('react-intersection-observer', () => ({
   useInView: () => [],
@@ -33,7 +34,7 @@ describe('<CahtList />', () => {
 
   context('empty chat list', () => {
     beforeEach(() => {
-      mockFetchData.data.pages[0].chatRooms = [];
+      mockQueryData.data.pages[0].chatRooms = [];
     });
 
     it('render empty message', () => {
@@ -45,7 +46,7 @@ describe('<CahtList />', () => {
 
   context('when loading', () => {
     beforeEach(() => {
-      mockFetchData.isLoading = true;
+      mockQueryData.isLoading = true;
     });
 
     it('render loading message', () => {

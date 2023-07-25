@@ -2,14 +2,15 @@ import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import { apiService } from '../../services/ApiService';
+
+import useLoginUserStore from '../../hooks/useLoginUserStore';
+
 import profileIcon from '../../assets/image/icon/profile-icon.png';
 import profileListIcon from '../../assets/image/icon/profile-list-icon.png';
 import chatListIcon from '../../assets/image/icon/chat-list-icon.png';
 import accountIcon from '../../assets/image/icon/account-icon.png';
 import logoutIcon from '../../assets/image/icon/logout-icon.png';
-
-import { apiService } from '../../services/ApiService';
-import useLoginUserStore from '../../hooks/useLoginUserStore';
 
 export default function Header() {
   const [, store] = useLoginUserStore();

@@ -1,10 +1,10 @@
 import { format, parse } from 'date-fns';
 
 const formatDateWithOption = (
-  dateString : string,
+  dateParam : string,
   option : 'time' | 'monthDay' | 'yearMonthDay',
 ) => {
-  const date = parse(dateString, 'yyyy.MM.dd HH:mm:ss', new Date());
+  const date = parse(dateParam, 'yyyy.MM.dd HH:mm:ss', new Date());
 
   switch (option) {
   case 'time':
