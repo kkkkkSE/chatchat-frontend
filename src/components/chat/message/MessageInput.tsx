@@ -85,11 +85,10 @@ export default function MessageInput({
 
 const Container = styled.div`
   ${(props) => props.theme.alignCenter.horizontal}
-  align-items: flex-end;
+  align-items: center;
   width: calc(100% + 4rem);
-  margin-left: -2rem;
   margin-bottom: -2rem;
-  padding: .8rem 2rem;
+  padding: .4rem 2rem;
   background-color: ${(props) => props.theme.colors.white.default};
   border-top: 1px solid ${(props) => props.theme.colors.gray2.default};
 
@@ -100,15 +99,14 @@ const Container = styled.div`
 
   form {
     ${(props) => props.theme.alignCenter.horizontal}
-    align-items: flex-end;
+    align-items: center;
     flex-grow: 1;
   }
 
   @media screen and (${(props) => props.theme.breakPoint.mobile}){
     width: calc(100% + 3.2rem);
-    margin-left: -1.6rem;
     margin-bottom: -1.6rem;
-    padding: .8rem 1.2rem;
+    padding: .2rem 1.2rem;
     bottom: 6rem;
 
     button:nth-child(1){
