@@ -22,11 +22,17 @@ const mockLoginUserData : {
   loading: false,
 };
 
-jest.mock('../../hooks/useLoginUserStore', () => () => [mockLoginUserData]);
+const store = {
+  fetchLoginUser: jest.fn(),
+};
+
+jest.mock('../../hooks/useLoginUserStore', () => () => [
+  mockLoginUserData, store,
+]);
 
 describe('<MyProfile />', () => {
   context('user type is company', () => {
-    it('render a logged in company profile ', () => {
+    it('render a logged in company profile', () => {
       render(<MyProfile />);
 
       screen.getByText(/기업명/);

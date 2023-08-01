@@ -45,10 +45,14 @@ const user = {
   type: 'company',
 };
 
+const store = {
+  fetchLoginUser: jest.fn(),
+};
+
 jest.mock('./hooks/useLoginUserStore', () => () => [{
   userType: user.type,
   profile: nullProfile,
-}]);
+}, store]);
 
 jest.mock('./hooks/useCheckLoginUser', () => () => ({ validUser: true }));
 

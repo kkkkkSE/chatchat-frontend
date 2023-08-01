@@ -6,6 +6,7 @@ const ProfileImage = styled.img`
   background-color: ${(props) => props.theme.colors.gray2.default};
   border-radius: 30%;
   object-fit: cover;
+  border: 1px solid ${(props) => props.theme.colors.gray2.default};
 `;
 
 export default ProfileImage;

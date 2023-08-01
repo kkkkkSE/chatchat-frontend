@@ -4,7 +4,7 @@ export const STATIC_ROUTES = {
   SIGN_UP: '/sign-up',
   CHATROOMS: '/chatrooms',
   MY_PROFILE: '/profile',
-  EDIT_MY_PROFILE: '/profile/edit',
+  MY_PROFILE_EDIT: '/profile/edit',
   AUTO_REPLIES: '/auto-replies',
   OPEN_PROFILES: '/open-profiles',
   ACCOUNT: '/account',
