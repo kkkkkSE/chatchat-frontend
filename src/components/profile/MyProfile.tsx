@@ -1,18 +1,24 @@
+import { useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
 import useLoginUserStore from '../../hooks/useLoginUserStore';
 
-import ProfileImage from '../ui/ProfileImage';
-
 import profileEditIcon from '../../assets/image/icon/profile-edit-icon.png';
 import autoReplyIcon from '../../assets/image/icon/auto-reply-edit-icon.png';
+
+import ProfileBody from './ProfileBody';
 
 export default function MyProfile() {
   const [{
     loading, userType, profile, error,
-  }] = useLoginUserStore();
+  }, store] = useLoginUserStore();
+
+  useEffect(() => {
+    store.fetchLoginUser(userType);
+  }, []);
 
   // TODO : Error Page로 이동하기
   if (error) {
@@ -26,16 +32,11 @@ export default function MyProfile() {
 
   return (
     <Container>
-      <div>
-        <ProfileImage src={profile.imageUrl} alt={profile.name} />
-      </div>
-      <b>{profile.name}</b>
-      {profile.description && (
-        <pre>{profile.description}</pre>
-      )}
+      <ProfileBody profile={profile} />
+
       <ul>
         <li>
-          <Link to="/edit">
+          <Link to="edit">
             <div><img src={profileEditIcon} alt="" /></div>
             <span>프로필 편집</span>
           </Link>
@@ -58,29 +59,12 @@ const Container = styled.div`
   justify-content: start;
   overflow-y: scroll;
 
-  > div:nth-child(1) {
-    width: 15rem;
-    height: 15rem;
-    margin-block: 3rem;
-  }
-
-  b {
-    ${(props) => props.theme.texts.bold.title}
-  }
-
-  pre {
-    ${(props) => props.theme.texts.regular.large}
-    max-width: 48rem;
-    padding-top: 2rem;
-    white-space: pre-line;
-  }
-
   ul {
     display: flex;
     padding-top: 6rem;
 
     li {
-      width: 12rem;
+      margin-inline: 2.4rem;
 
       a {
         ${(props) => props.theme.alignCenter.vertical}
@@ -107,27 +91,11 @@ const Container = styled.div`
   }
 
   @media screen and (${(props) => props.theme.breakPoint.mobile}) {
-    > div:nth-child(1) {
-      width: 10.8rem;
-      height: 10.8rem;
-      margin-block: 2rem;
-    }
-
-    b {
-      ${(props) => props.theme.texts.bold.subTitle}
-    }
-
-    pre {
-      ${(props) => props.theme.texts.regular.medium}
-      max-width: 80%;
-      padding-top: 1.6rem;
-    }
-
     ul {
       padding-top: 3.8rem;
 
       li {
-        width: 9.6rem;
+        margin-inline: 2rem;
 
         a {
           div {

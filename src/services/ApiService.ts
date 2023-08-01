@@ -22,7 +22,7 @@ export default class ApiService {
         STATIC_API_PATHS.LOGOUT,
       ];
 
-      if (!config.url) {
+      if (!config.url || config.url === STATIC_API_PATHS.UPLOAD_PROFILE_IMAGE) {
         return config;
       }
 
@@ -128,6 +128,38 @@ export default class ApiService {
     type: string;
   }) {
     const { data } = await this.instance.get(DYNAMIC_API_PATHS.SELF_ACCOUNT(type));
+    return data;
+  }
+
+  async updateProfile({
+    type, name, description, imageUrl, profileVisibility,
+  } : {
+    type: string;
+    name: string;
+    description?: string;
+    imageUrl: string;
+    profileVisibility?: boolean;
+  }) {
+    await this.instance.patch(
+      DYNAMIC_API_PATHS.SELF_ACCOUNT(type),
+      {
+        name,
+        description,
+        imageUrl,
+        profileVisibility,
+      },
+    );
+  }
+
+  async uploadImage({ formData }:{
+    formData: FormData;
+  }) {
+    const { data } = await this.instance.post(
+      STATIC_API_PATHS.UPLOAD_PROFILE_IMAGE,
+      formData,
+      { headers: { 'Content-Type': 'multipart/form-data' } },
+    );
+
     return data;
   }
 }
