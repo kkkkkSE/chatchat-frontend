@@ -33,6 +33,7 @@ const Container = styled.div`
 
   > :nth-child(2){
     height: calc(100vh - 6rem);
+    overflow-y: scroll;
     padding: 0 2rem 2rem;
   }
 
@@ -43,7 +44,6 @@ const Container = styled.div`
   }
 
   @media screen and (${(props) => props.theme.breakPoint.mobile}) {
-    
     > :nth-child(1){
       padding-inline: 1.6rem;
     }
