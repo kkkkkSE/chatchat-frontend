@@ -3,6 +3,8 @@ import { rest } from 'msw';
 
 import { VALID_ACCESS_TOKEN, VALID_REFRESH_TOKEN } from '../../../fixtures/constants';
 
+import dummyImage from '../../assets/image/dummy-image.png';
+
 const BASE_URL = process.env.API_BASE_URL;
 
 const commonHandlers = [
@@ -21,6 +23,11 @@ const commonHandlers = [
       ctx.json({ accessToken: VALID_ACCESS_TOKEN }),
     );
   }),
+  rest.post(`${BASE_URL}/files`, async (req, res, ctx) => res(
+    ctx.status(201),
+    ctx.json({ url: dummyImage }),
+  )),
+
 ];
 
 export default commonHandlers;

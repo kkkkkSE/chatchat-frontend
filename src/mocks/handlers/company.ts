@@ -9,6 +9,8 @@ import isValidAccessToken from '../isValidAccessToken';
 
 const BASE_URL = process.env.API_BASE_URL;
 
+const company = { ...fixtures.company };
+
 const companyHandlers = [
   rest.post(`${BASE_URL}/company/session`, async (req, res, ctx) => {
     const { username, password } = await req.json();
@@ -44,7 +46,16 @@ const companyHandlers = [
 
     return res(ctx.status(201));
   }),
-  rest.patch(`${BASE_URL}/companies/me`, (req, res, ctx) => {
+  rest.patch(`${BASE_URL}/companies/me`, async (req, res, ctx) => {
+    const {
+      name, description, imageUrl, profileVisibility,
+    } = await req.json();
+
+    company.name = name;
+    company.description = description;
+    company.imageUrl = imageUrl;
+    company.profileVisibility = profileVisibility;
+
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
@@ -79,8 +90,6 @@ const companyHandlers = [
     return res(ctx.status(400));
   }),
   rest.get(`${BASE_URL}/companies/me`, (req, res, ctx) => {
-    const { company } = fixtures;
-
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 

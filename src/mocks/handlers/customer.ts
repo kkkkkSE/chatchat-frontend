@@ -9,6 +9,8 @@ import isValidAccessToken from '../isValidAccessToken';
 
 const BASE_URL = process.env.API_BASE_URL;
 
+const customer = { ...fixtures.customer };
+
 const customerHandlers = [
   rest.post(`${BASE_URL}/customer/session`, async (req, res, ctx) => {
     const { username, password } = await req.json();
@@ -44,7 +46,12 @@ const customerHandlers = [
 
     return res(ctx.status(201));
   }),
-  rest.patch(`${BASE_URL}/customers/me`, (req, res, ctx) => {
+  rest.patch(`${BASE_URL}/customers/me`, async (req, res, ctx) => {
+    const { name, imageUrl } = await req.json();
+
+    customer.name = name;
+    customer.imageUrl = imageUrl;
+
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
@@ -79,8 +86,6 @@ const customerHandlers = [
     return res(ctx.status(400));
   }),
   rest.get(`${BASE_URL}/customers/me`, (req, res, ctx) => {
-    const { customer } = fixtures;
-
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
