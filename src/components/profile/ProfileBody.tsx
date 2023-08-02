@@ -25,6 +25,8 @@ export default function ProfileBody({
 }
 
 const Container = styled.div`
+  ${(props) => props.theme.alignCenter.vertical};
+  
   div {
     width: 15rem;
     height: 15rem;
