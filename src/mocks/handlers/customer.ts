@@ -9,6 +9,8 @@ import isValidAccessToken from '../isValidAccessToken';
 
 const BASE_URL = process.env.API_BASE_URL;
 
+const userType = 'customer';
+
 const customer = { ...fixtures.customer };
 
 const customerHandlers = [
@@ -18,7 +20,7 @@ const customerHandlers = [
     if (username === 'customer1' && password === 'Password1234!') {
       return res(
         ctx.status(201),
-        ctx.json({ accessToken: VALID_ACCESS_TOKEN }),
+        ctx.json({ accessToken: VALID_ACCESS_TOKEN[userType] }),
         ctx.cookie('refreshToken', VALID_REFRESH_TOKEN),
       );
     }
@@ -55,7 +57,7 @@ const customerHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     return res(ctx.status(204));
   }),
@@ -69,7 +71,7 @@ const customerHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     if (password !== 'Password1234!') {
       return res(ctx.status(400), ctx.json({ message: '기존 비밀번호가 맞지 않습니다' }));
@@ -89,7 +91,7 @@ const customerHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     return res(
       ctx.status(200),
@@ -102,7 +104,7 @@ const customerHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     if (password !== 'Password1234!') {
       return res(ctx.status(400), ctx.json({ message: '기존 비밀번호가 맞지 않습니다' }));
@@ -117,7 +119,7 @@ const customerHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     const COUNT_UNIT = 10;
 
@@ -144,7 +146,7 @@ const customerHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     const COUNT_UNIT = 20;
 
@@ -174,7 +176,7 @@ const customerHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     const COUNT_UNIT = 10;
 
@@ -211,7 +213,7 @@ const customerHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     return res(
       ctx.status(200),

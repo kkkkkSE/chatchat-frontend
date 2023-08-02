@@ -9,6 +9,8 @@ import isValidAccessToken from '../isValidAccessToken';
 
 const BASE_URL = process.env.API_BASE_URL;
 
+const userType = 'company';
+
 const company = { ...fixtures.company };
 
 const companyHandlers = [
@@ -18,7 +20,7 @@ const companyHandlers = [
     if (username === 'company1' && password === 'Password1234!') {
       return res(
         ctx.status(201),
-        ctx.json({ accessToken: VALID_ACCESS_TOKEN }),
+        ctx.json({ accessToken: VALID_ACCESS_TOKEN[userType] }),
         ctx.cookie('refreshToken', VALID_REFRESH_TOKEN),
       );
     }
@@ -59,7 +61,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     return res(ctx.status(204));
   }),
@@ -73,7 +75,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     if (password !== 'Password1234!') {
       return res(ctx.status(400), ctx.json({ message: '기존 비밀번호가 맞지 않습니다' }));
@@ -93,7 +95,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     return res(
       ctx.status(200),
@@ -106,7 +108,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     if (password !== 'Password1234!') {
       return res(ctx.status(400), ctx.json({ message: '기존 비밀번호가 맞지 않습니다' }));
@@ -121,7 +123,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     const COUNT_UNIT = 10;
 
@@ -148,7 +150,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     const COUNT_UNIT = 20;
 
@@ -175,7 +177,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     return res(
       ctx.status(200),
@@ -186,7 +188,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     return res(ctx.status(201));
   }),
@@ -194,7 +196,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     return res(ctx.status(204));
   }),
@@ -202,7 +204,7 @@ const companyHandlers = [
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
-    if (!authorization || !isValidAccessToken(accessToken)) return res(ctx.status(401));
+    if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
     return res(ctx.status(204));
   }),

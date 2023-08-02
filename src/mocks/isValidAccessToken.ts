@@ -1,7 +1,10 @@
 import { VALID_ACCESS_TOKEN } from '../../fixtures/constants';
 
-const isValidAccessToken = (accessToken:string) => {
-  if (accessToken === VALID_ACCESS_TOKEN) {
+const isValidAccessToken = (
+  type: 'company' | 'customer',
+  accessToken:string,
+) => {
+  if (accessToken === VALID_ACCESS_TOKEN[type]) {
     return true;
   }
 
