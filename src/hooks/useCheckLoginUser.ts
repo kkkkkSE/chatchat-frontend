@@ -11,18 +11,18 @@ const useCheckLoginUser = (type: string) => {
   const [{ error }, store] = useLoginUserStore();
 
   useEffect(() => {
-    const fetchLoginUser = async () => {
-      await store.fetchLoginUser(type);
-    };
+    store.fetchLoginUser(type);
+  }, [accessToken]);
 
-    fetchLoginUser();
-
+  useEffect(() => {
     if (error) {
+      store.reset();
+
       setAccessToken('');
     } else {
       setValidUser(true);
     }
-  }, [accessToken]);
+  }, [error]);
 
   return { validUser };
 };
