@@ -108,7 +108,7 @@ describe('routes', () => {
   });
 
   describe('after login', () => {
-    context('when the current path is "/chatrooms', () => {
+    context('when the current path is "/chatrooms"', () => {
       it('renders <ChatListPage />', () => {
         setupRouterProvider(STATIC_ROUTES.CHATROOMS);
 
@@ -116,7 +116,7 @@ describe('routes', () => {
       });
     });
 
-    context('when the current path is “/chatrooms/:id', () => {
+    context('when the current path is "/chatrooms/:id"', () => {
       it('renders <ChatRoomPage />', () => {
         const chatRoomId = 1;
 
@@ -126,11 +126,19 @@ describe('routes', () => {
       });
     });
 
-    context('when the current path is “/profile', () => {
+    context('when the current path is "/profile"', () => {
       it('renders <ProfilePage />', () => {
         setupRouterProvider(STATIC_ROUTES.MY_PROFILE);
 
         screen.getByTestId(/my-profile/);
+      });
+    });
+
+    context('when the current path is "/auto-replies"', () => {
+      it('renders <AutoReplyAdminList />', () => {
+        setupRouterProvider(STATIC_ROUTES.AUTO_REPLIES);
+
+        screen.getByTestId(/auto-reply-list/);
       });
     });
   });

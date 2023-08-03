@@ -10,8 +10,8 @@ import isValidAccessToken from '../isValidAccessToken';
 const BASE_URL = process.env.API_BASE_URL;
 
 const userType = 'company';
-
 const company = { ...fixtures.company };
+const autoReplies = [...fixtures.autoReplies];
 
 const companyHandlers = [
   rest.post(`${BASE_URL}/company/session`, async (req, res, ctx) => {
@@ -171,9 +171,7 @@ const companyHandlers = [
       ctx.json({ ...chatRoom, page }),
     );
   }),
-  rest.get(`${BASE_URL}/auto-replies`, (req, res, ctx) => {
-    const { autoReplies } = fixtures;
-
+  rest.get(`${BASE_URL}/company/auto-replies`, (req, res, ctx) => {
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
@@ -184,7 +182,7 @@ const companyHandlers = [
       ctx.json({ autoReplies }),
     );
   }),
-  rest.post(`${BASE_URL}/auto-replies`, (req, res, ctx) => {
+  rest.post(`${BASE_URL}/company/auto-replies`, (req, res, ctx) => {
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
@@ -192,7 +190,7 @@ const companyHandlers = [
 
     return res(ctx.status(201));
   }),
-  rest.patch(`${BASE_URL}/auto-replies/:id`, (req, res, ctx) => {
+  rest.patch(`${BASE_URL}/company/auto-replies/:id`, (req, res, ctx) => {
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
@@ -200,9 +198,14 @@ const companyHandlers = [
 
     return res(ctx.status(204));
   }),
-  rest.delete(`${BASE_URL}/auto-replies/:id`, (req, res, ctx) => {
+  rest.delete(`${BASE_URL}/company/auto-replies/:id`, (req, res, ctx) => {
+    const id = Number(req.params.id);
+    const index = autoReplies.findIndex((autoReply) => autoReply.id === id);
+
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
+
+    autoReplies.splice(index, 1);
 
     if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 

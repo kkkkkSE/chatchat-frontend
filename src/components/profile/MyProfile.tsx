@@ -43,7 +43,7 @@ export default function MyProfile() {
         </li>
         {userType === 'company' && (
           <li>
-            <Link to="/auto-reply">
+            <Link to="/auto-replies">
               <div><img src={autoReplyIcon} alt="" /></div>
               <span>자동응답 관리</span>
             </Link>

@@ -35,7 +35,7 @@ export interface ChatRoomDetail{
   messages: Message[];
 }
 
-export interface autoReply{
+export interface AutoReply{
   id: number;
   question: string;
   answer: string;
