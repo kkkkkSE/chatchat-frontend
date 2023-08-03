@@ -4,6 +4,8 @@ import NavigationBar from '../ui/NavigationBar';
 
 interface ContentLayoutProps {
   enableBack?: boolean;
+  actionButton?: 'add' | 'search';
+  onClickActionButton?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   pageHeader: string;
   children: React.ReactNode;
   testId?: string;
@@ -11,13 +13,21 @@ interface ContentLayoutProps {
 
 export default function ContentLayout({
   enableBack = false,
+  actionButton = undefined,
+  onClickActionButton = undefined,
   pageHeader,
   children,
   testId = undefined,
 }: ContentLayoutProps) {
   return (
     <Container data-testid={testId}>
-      <NavigationBar enableBack={enableBack}>{pageHeader}</NavigationBar>
+      <NavigationBar
+        enableBack={enableBack}
+        actionButton={actionButton}
+        onClickActionButton={onClickActionButton}
+      >
+        {pageHeader}
+      </NavigationBar>
       {children}
     </Container>
   );
@@ -26,10 +36,7 @@ export default function ContentLayout({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  
-  > :nth-child(1){
-    padding-inline: 2rem;
-  }
+  text-align: left;
 
   > :nth-child(2){
     height: calc(100vh - 6rem);
@@ -44,10 +51,6 @@ const Container = styled.div`
   }
 
   @media screen and (${(props) => props.theme.breakPoint.mobile}) {
-    > :nth-child(1){
-      padding-inline: 1.6rem;
-    }
-    
     > :nth-child(2){
       height: calc(100vh - 11.2rem);
       padding: 0 1.6rem 1.6rem;

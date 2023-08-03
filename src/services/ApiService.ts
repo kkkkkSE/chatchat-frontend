@@ -151,6 +151,16 @@ export default class ApiService {
     );
   }
 
+  async fetchAutoReplyByCompany() {
+    const { data } = await this.instance.get(STATIC_API_PATHS.AUTO_REPLIES_BY_COMPANY);
+
+    return data;
+  }
+
+  async deleteAutoReply({ id } : {id : number}) {
+    await this.instance.delete(DYNAMIC_API_PATHS.AUTO_REPLIES_FOR_COMPANY(id));
+  }
+
   async uploadImage({ formData }:{
     formData: FormData;
   }) {
