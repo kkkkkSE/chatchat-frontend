@@ -135,10 +135,18 @@ describe('routes', () => {
     });
 
     context('when the current path is "/auto-replies"', () => {
-      it('renders <AutoReplyAdminList />', () => {
+      it('renders <AutoReplyAdminListPage />', () => {
         setupRouterProvider(STATIC_ROUTES.AUTO_REPLIES);
 
         screen.getByTestId(/auto-reply-list/);
+      });
+    });
+
+    context('when the current path is "/auto-replies/new"', () => {
+      it('renders <AutoReplyNewPage />', () => {
+        setupRouterProvider(STATIC_ROUTES.AUTO_REPLIES_NEW);
+
+        screen.getByTestId(/auto-reply-new/);
       });
     });
   });

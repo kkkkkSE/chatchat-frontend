@@ -48,7 +48,7 @@ export default function AutoReplyRow({
 const Container = styled.li`
   display: flex;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray2.default};
-
+  
   &:last-child {
     border-bottom: none;
   }

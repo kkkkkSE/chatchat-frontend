@@ -8,8 +8,9 @@ import { STATIC_ROUTES } from '../constants/routes';
 function AutoReplyAdminPage() {
   const navigate = useNavigate();
 
+  // TODO : 등록 최대 개수 초과 시 안내 모달창 띄우기
   const handleClickAdd = () => {
-    navigate(STATIC_ROUTES.AUTO_REPLIES_ADD);
+    navigate(STATIC_ROUTES.AUTO_REPLIES_NEW);
   };
 
   return (

@@ -157,6 +157,17 @@ export default class ApiService {
     return data;
   }
 
+  async createAutoReply({
+    question, answer,
+  } : {
+    question : string;
+    answer: string;
+  }) {
+    await this.instance.post(STATIC_API_PATHS.AUTO_REPLIES_BY_COMPANY, {
+      question, answer,
+    });
+  }
+
   async deleteAutoReply({ id } : {id : number}) {
     await this.instance.delete(DYNAMIC_API_PATHS.AUTO_REPLIES_FOR_COMPANY(id));
   }

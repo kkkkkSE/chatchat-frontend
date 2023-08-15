@@ -182,9 +182,17 @@ const companyHandlers = [
       ctx.json({ autoReplies }),
     );
   }),
-  rest.post(`${BASE_URL}/company/auto-replies`, (req, res, ctx) => {
+  rest.post(`${BASE_URL}/company/auto-replies`, async (req, res, ctx) => {
+    const { question, answer } = await req.json();
+
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
+
+    autoReplies.push({
+      id: autoReplies.length + 1,
+      question,
+      answer,
+    });
 
     if (!authorization || !isValidAccessToken(userType, accessToken)) return res(ctx.status(401));
 
