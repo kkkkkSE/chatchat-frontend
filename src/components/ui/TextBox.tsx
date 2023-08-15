@@ -1,4 +1,4 @@
-import type React from 'react';
+import { useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -9,6 +9,8 @@ type TextBoxProps = {
   value: string;
   onChange?: (value: string) => void;
   readOnly?: boolean;
+  maxLength?: number;
+  showLength?: boolean;
 };
 
 export default function TextBox({
@@ -18,9 +20,21 @@ export default function TextBox({
   value,
   onChange = undefined,
   readOnly = false,
+  maxLength = undefined,
+  showLength = false,
 }: TextBoxProps) {
+  const [textLength, setTextLength] = useState(0);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event.target.value);
+    const inputValue = event.target.value;
+
+    if (maxLength && inputValue.length > maxLength) {
+      return;
+    }
+
+    setTextLength(inputValue.length);
+
+    onChange?.(inputValue);
   };
 
   return (
@@ -35,13 +49,24 @@ export default function TextBox({
           readOnly={readOnly}
         />
       </label>
+      {showLength && (
+        <span>
+          {textLength}
+          {' '}
+          /
+          {' '}
+          {maxLength}
+        </span>
+      )}
     </Container>
   );
 }
 
 const Container = styled.div`
+  display: flex;  
+  flex-direction: column;
+  align-items: end;
   padding-block: 0.7rem;
-  flex-grow: 1;
   
   label {
     width: 100%;
@@ -82,6 +107,12 @@ const Container = styled.div`
     }
   }
 
+  > span {
+    ${(props) => props.theme.texts.regular.small};
+    ${(props) => props.theme.colors.gray1.default};
+    padding-top: .2rem;
+  }
+
   @media screen and (${(props) => props.theme.breakPoint.mobile}){
     padding-block: 0.6rem;
 
@@ -105,5 +136,9 @@ const Container = styled.div`
         padding: .8rem 1.2rem;
       }
     } 
+
+    > span {
+      ${(props) => props.theme.texts.regular.hint};
+    }
   }
 `;

@@ -6,7 +6,7 @@ export const STATIC_ROUTES = {
   MY_PROFILE: '/profile',
   MY_PROFILE_EDIT: '/profile/edit',
   AUTO_REPLIES: '/auto-replies',
-  AUTO_REPLIES_ADD: '/auto-replies/new',
+  AUTO_REPLIES_NEW: '/auto-replies/new',
   OPEN_PROFILES: '/open-profiles',
   ACCOUNT: '/account',
   DELETE_ACCOUNT: '/account/delete',

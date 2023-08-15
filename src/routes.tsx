@@ -11,6 +11,7 @@ import ProfileEditPage from './pages/ProfileEditPage';
 import ProfilePage from './pages/ProfilePage';
 import SignUpPage from './pages/SignUpPage';
 import AutoReplyAdminPage from './pages/AutoReplyAdminPage';
+import AutoReplyNewPage from './pages/AutoReplyNewPage';
 
 const routes = [
   {
@@ -28,6 +29,7 @@ const routes = [
       { path: STATIC_ROUTES.MY_PROFILE, element: <ProfilePage /> },
       { path: STATIC_ROUTES.MY_PROFILE_EDIT, element: <ProfileEditPage /> },
       { path: STATIC_ROUTES.AUTO_REPLIES, element: <AutoReplyAdminPage /> },
+      { path: STATIC_ROUTES.AUTO_REPLIES_NEW, element: <AutoReplyNewPage /> },
     ],
   },
 ];
