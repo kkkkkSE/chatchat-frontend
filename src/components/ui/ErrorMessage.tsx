@@ -17,6 +17,7 @@ const Container = styled.p`
     ${(props) => props.theme.texts.regular.small}
     color: ${(props) => props.theme.colors.accent.default};
     padding-block: 1.2rem;
+    text-align: center;
 
     @media screen and (${(props) => props.theme.breakPoint.mobile}){
       ${(props) => props.theme.texts.regular.hint}

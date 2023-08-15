@@ -40,6 +40,7 @@ const Container = styled.div`
 
   > :nth-child(2){
     height: calc(100vh - 6rem);
+    overflow-x: hidden;
     overflow-y: scroll;
     padding: 0 2rem 2rem;
   }

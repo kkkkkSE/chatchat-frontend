@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { forwardRef, useCallback } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -10,16 +10,18 @@ interface TextAreaProps {
   placeholder?: string;
   fixHeight?: boolean;
   maxLength?: number;
+  showLength?: boolean;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onKeyPress?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({
-  value, label, placeholder, fixHeight, maxLength, onKeyPress, onChange,
+  value, label, placeholder, fixHeight, maxLength, showLength, onKeyPress, onChange,
 }, ref) => {
+  const [textLength, setTextLength] = useState(0);
+
   const handleResizeHeight = useCallback(() => {
     if (fixHeight) return;
-
     if (typeof ref === 'object' && ref?.current) {
       const height = ref.current.scrollHeight;
 
@@ -31,6 +33,14 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const inputValue = event.target.value;
+
+    if (maxLength && inputValue.length > maxLength) {
+      return;
+    }
+
+    setTextLength(inputValue.length);
+
     handleResizeHeight();
 
     onChange?.(event);
@@ -43,12 +53,20 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({
         <textarea
           value={value}
           placeholder={placeholder}
-          maxLength={maxLength}
           onChange={handleChange}
           onKeyPress={onKeyPress}
           ref={ref}
         />
       </label>
+      {showLength && (
+        <span>
+          {textLength}
+          {' '}
+          /
+          {' '}
+          {maxLength}
+        </span>
+      )}
     </Container>
   );
 });
@@ -61,13 +79,16 @@ TextArea.defaultProps = {
   fixHeight: false,
   onKeyPress: undefined,
   maxLength: undefined,
+  showLength: false,
 };
 
 export default TextArea;
 
 const Container = styled.div<{ fixHeight?: boolean }>`
+  display: flex;  
+  flex-direction: column;
+  align-items: end;
   padding-block: .7rem;
-  line-height: 1;
   flex-grow: 1;
 
   label {
@@ -110,17 +131,23 @@ const Container = styled.div<{ fixHeight?: boolean }>`
         color: ${(props) => props.theme.colors.gray1.default};
         background-color: ${(props) => props.theme.colors.gray2.default};
       }
-
-      ${(props) => props.fixHeight && `
-        label {
-          textarea {
-            min-height: 12rem;
-            height: 12rem;
-          }
-        }
-      `}
     }
   }
+
+  > span {
+    ${(props) => props.theme.texts.regular.small};
+    ${(props) => props.theme.colors.gray1.default};
+    padding-top: .2rem;
+  }
+
+  ${(props) => props.fixHeight && `
+    label {
+      textarea {
+        min-height: 12rem;
+        height: 12rem;
+      }
+    }
+  `}
 
   @media screen and (${(props) => props.theme.breakPoint.mobile}){   
     padding-block: .6rem;
@@ -145,24 +172,27 @@ const Container = styled.div<{ fixHeight?: boolean }>`
         padding: .8rem 1.2rem;
       }
     }
-  }
 
-  ${(props) => props.fixHeight && `
-    label {
-      textarea {
-        min-height: 12rem;
-        height: 12rem;
-      }
+    > span {
+      ${(props) => props.theme.texts.regular.hint};
     }
 
-    @media screen and (${props.theme.breakPoint.mobile}){    
+    ${(props) => props.fixHeight && `
       label {
         textarea {
-          min-height: 7rem;
-          height: 7rem;
+          min-height: 12rem;
+          height: 12rem;
         }
       }
-    }   
-  `
-}
+
+      @media screen and (${props.theme.breakPoint.mobile}){    
+        label {
+          textarea {
+            min-height: 7rem;
+            height: 7rem;
+          }
+        }
+      }   
+    `}
+  }
 `;
