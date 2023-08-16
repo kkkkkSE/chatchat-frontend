@@ -18,7 +18,8 @@ interface TextAreaProps {
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({
   value, label, placeholder, fixHeight, maxLength, showLength, onKeyPress, onChange,
 }, ref) => {
-  const [textLength, setTextLength] = useState(0);
+  // forwardRef 컴포넌트의 단위 테스트 통과를 위한 옵셔널 체이닝 사용
+  const [textLength, setTextLength] = useState(value?.length || 0);
 
   const handleResizeHeight = useCallback(() => {
     if (fixHeight) return;
