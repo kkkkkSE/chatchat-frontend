@@ -34,11 +34,11 @@ describe('<AutoReplyEditForm />', () => {
   });
 
   context('when submitting form', () => {
-    it('execute uploadLoginUser function in store', async () => {
+    it('execute modifyAutoReply function in store', async () => {
       render(<AutoReplyEditForm
-        id={1}
-        question="question"
-        answer="answer"
+        id={autoReply.id}
+        question={autoReply.question}
+        answer={autoReply.answer}
       />);
 
       fireEvent.submit(screen.getByTestId('auto-reply-edit-form'));
