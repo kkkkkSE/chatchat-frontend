@@ -168,6 +168,18 @@ export default class ApiService {
     });
   }
 
+  async modifyAutoReply({
+    id, question, answer,
+  } : {
+    id: number;
+    question : string;
+    answer: string;
+  }) {
+    await this.instance.patch(DYNAMIC_API_PATHS.AUTO_REPLIES_FOR_COMPANY(id), {
+      question, answer,
+    });
+  }
+
   async deleteAutoReply({ id } : {id : number}) {
     await this.instance.delete(DYNAMIC_API_PATHS.AUTO_REPLIES_FOR_COMPANY(id));
   }
