@@ -198,7 +198,16 @@ const companyHandlers = [
 
     return res(ctx.status(201));
   }),
-  rest.patch(`${BASE_URL}/company/auto-replies/:id`, (req, res, ctx) => {
+  rest.patch(`${BASE_URL}/company/auto-replies/:id`, async (req, res, ctx) => {
+    const id = Number(req.params.id);
+
+    const { question, answer } = await req.json();
+
+    const index = autoReplies.findIndex((autoReply) => autoReply.id === id);
+
+    autoReplies[index].question = question;
+    autoReplies[index].answer = answer;
+
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
 
