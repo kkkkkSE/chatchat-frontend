@@ -17,5 +17,5 @@ export const STATIC_ROUTES = {
 export const DYNAMIC_ROUTES = {
   CHATROOM: (id: number) => `/chatrooms/${id}`,
   OPEN_PROFILE: (id: number) => `/open-profiles/${id}`,
-  EDIT_AUTO_REPLIY: (id: number) => `/auto-replies/${id}`,
+  AUTO_REPLIY_EDIT: (id: number) => `/auto-replies/${id}`,
 };
