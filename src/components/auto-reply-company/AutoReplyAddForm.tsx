@@ -40,14 +40,14 @@ export default function AutoReplyAddForm() {
   }, [done]);
 
   const onSubmit = (data: FormValues) => {
-    store.addAutoReply(data.question, data.answer.trim());
+    store.addAutoReply(data.question, data.answer);
   };
 
   return (
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        data-testid="auto-reply-form"
+        data-testid="auto-reply-add-form"
       >
         <Controller
           control={control}

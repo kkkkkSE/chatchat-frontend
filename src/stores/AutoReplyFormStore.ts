@@ -40,15 +40,21 @@ export default class AutoReplyFormStore {
     answer: string,
   ) {
     try {
-      if (!question) {
+      const trimQuestion = question.trim();
+      const trimAnswer = answer.trim();
+
+      if (!trimQuestion) {
         throw Error('질문을 작성해주세요');
       }
 
-      if (!answer) {
+      if (!trimAnswer) {
         throw Error('답변을 작성해주세요');
       }
 
-      await apiService.createAutoReply({ question, answer });
+      await apiService.createAutoReply({
+        question: trimQuestion,
+        answer: trimAnswer,
+      });
 
       this.setDone();
     } catch (e) {
@@ -73,15 +79,22 @@ export default class AutoReplyFormStore {
     answer: string,
   ) {
     try {
-      if (!question) {
+      const trimQuestion = question.trim();
+      const trimAnswer = answer.trim();
+
+      if (!trimQuestion) {
         throw Error('질문을 작성해주세요');
       }
 
-      if (!answer) {
+      if (!trimAnswer) {
         throw Error('답변을 작성해주세요');
       }
 
-      await apiService.modifyAutoReply({ id, question, answer });
+      await apiService.modifyAutoReply({
+        id,
+        question: trimQuestion,
+        answer: trimAnswer,
+      });
 
       this.setDone();
     } catch (e) {
