@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { useQueryClient } from '@tanstack/react-query';
 
 import styled from 'styled-components';
@@ -7,6 +9,7 @@ import { AutoReply } from '../../types';
 import { apiService } from '../../services/ApiService';
 
 import { QUERY_KEY } from '../../constants/reactQuery';
+import { DYNAMIC_ROUTES } from '../../constants/routes';
 
 import AutoReplyItem from './AutoReplyItem';
 import AutoReplyButtons from './AutoReplyButtons';
@@ -20,8 +23,10 @@ export default function AutoReplyRow({
 }: AutoReplyRowProps) {
   const queryClient = useQueryClient();
 
+  const navigate = useNavigate();
+
   const handleClickEdit = () => {
-    // 질문, 답변 수정 페이지로 이동
+    navigate(DYNAMIC_ROUTES.AUTO_REPLIY_EDIT(autoReply.id));
   };
 
   // TODO : 삭제 체크를 위한 모달 추가

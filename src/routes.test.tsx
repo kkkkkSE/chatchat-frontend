@@ -149,5 +149,15 @@ describe('routes', () => {
         screen.getByTestId(/auto-reply-new/);
       });
     });
+
+    context('when the current path is "/auto-replies/:id"', () => {
+      it('renders <AutoReplyEditPage />', () => {
+        const id = 1;
+
+        setupRouterProvider(DYNAMIC_ROUTES.AUTO_REPLIY_EDIT(id));
+
+        screen.getByTestId(/auto-reply-edit/);
+      });
+    });
   });
 });

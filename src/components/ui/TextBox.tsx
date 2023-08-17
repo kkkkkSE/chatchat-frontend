@@ -23,7 +23,7 @@ export default function TextBox({
   maxLength = undefined,
   showLength = false,
 }: TextBoxProps) {
-  const [textLength, setTextLength] = useState(0);
+  const [textLength, setTextLength] = useState(value.length);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;

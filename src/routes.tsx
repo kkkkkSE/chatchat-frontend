@@ -12,6 +12,7 @@ import ProfilePage from './pages/ProfilePage';
 import SignUpPage from './pages/SignUpPage';
 import AutoReplyAdminPage from './pages/AutoReplyAdminPage';
 import AutoReplyNewPage from './pages/AutoReplyNewPage';
+import AutoReplyEditPage from './pages/AutoReplyEditPage';
 
 const routes = [
   {
@@ -30,6 +31,7 @@ const routes = [
       { path: STATIC_ROUTES.MY_PROFILE_EDIT, element: <ProfileEditPage /> },
       { path: STATIC_ROUTES.AUTO_REPLIES, element: <AutoReplyAdminPage /> },
       { path: STATIC_ROUTES.AUTO_REPLIES_NEW, element: <AutoReplyNewPage /> },
+      { path: `${STATIC_ROUTES.AUTO_REPLIES}/:id`, element: <AutoReplyEditPage /> },
     ],
   },
 ];

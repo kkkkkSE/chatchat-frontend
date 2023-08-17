@@ -65,4 +65,29 @@ export default class AutoReplyFormStore {
       }
     }
   }
+
+  @Action()
+  async modifyAutoReply(
+    id: number,
+    question: string,
+    answer: string,
+  ) {
+    try {
+      if (!question) {
+        throw Error('질문을 작성해주세요');
+      }
+
+      if (!answer) {
+        throw Error('답변을 작성해주세요');
+      }
+
+      await apiService.modifyAutoReply({ id, question, answer });
+
+      this.setDone();
+    } catch (e) {
+      if (e instanceof Error) {
+        this.setErrorMessage(e.message);
+      }
+    }
+  }
 }
