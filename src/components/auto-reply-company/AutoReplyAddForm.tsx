@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { Controller, useForm } from 'react-hook-form';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 import useAutoReplyFormStore from '../../hooks/useAutoReplyFormStore';
 
+import { QUERY_KEY } from '../../constants/reactQuery';
 import { STATIC_ROUTES } from '../../constants/routes';
 
 import TextArea from '../ui/TextArea';
@@ -18,6 +21,8 @@ const MAX_LENGTH = {
 };
 
 export default function AutoReplyAddForm() {
+  const queryClient = useQueryClient();
+
   const navigate = useNavigate();
 
   const [{ done, errorMessage }, store] = useAutoReplyFormStore();
@@ -34,6 +39,8 @@ export default function AutoReplyAddForm() {
   useEffect(() => {
     if (done) {
       store.reset();
+
+      queryClient.invalidateQueries(QUERY_KEY.AUTO_REPLY_ADMIN_LIST);
 
       navigate(STATIC_ROUTES.AUTO_REPLIES);
     }
