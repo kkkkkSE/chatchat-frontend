@@ -40,20 +40,18 @@ export default class AutoReplyFormStore {
     answer: string,
   ) {
     try {
-      const trimQuestion = question.trim();
-      const trimAnswer = answer.trim();
-
-      if (!trimQuestion) {
+      // react-hook-form data value 초기값 undefined
+      if (!question || !question.trim()) {
         throw Error('질문을 작성해주세요');
       }
 
-      if (!trimAnswer) {
+      if (!answer || !answer.trim()) {
         throw Error('답변을 작성해주세요');
       }
 
       await apiService.createAutoReply({
-        question: trimQuestion,
-        answer: trimAnswer,
+        question,
+        answer,
       });
 
       this.setDone();
@@ -79,21 +77,19 @@ export default class AutoReplyFormStore {
     answer: string,
   ) {
     try {
-      const trimQuestion = question.trim();
-      const trimAnswer = answer.trim();
-
-      if (!trimQuestion) {
+      // react-hook-form data value 초기값 undefined
+      if (!question || !question.trim()) {
         throw Error('질문을 작성해주세요');
       }
 
-      if (!trimAnswer) {
+      if (!answer || !answer.trim()) {
         throw Error('답변을 작성해주세요');
       }
 
       await apiService.modifyAutoReply({
         id,
-        question: trimQuestion,
-        answer: trimAnswer,
+        question,
+        answer,
       });
 
       this.setDone();
