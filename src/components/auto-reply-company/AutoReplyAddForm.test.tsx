@@ -8,6 +8,7 @@ const context = describe;
 
 const store = {
   addAutoReply: jest.fn(),
+  reset: jest.fn(),
 };
 
 jest.mock('../../hooks/useAutoReplyFormStore', () => () => [{}, store]);
