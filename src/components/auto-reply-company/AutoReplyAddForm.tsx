@@ -37,6 +37,10 @@ export default function AutoReplyAddForm() {
   const { control, handleSubmit } = useForm<FormValues>();
 
   useEffect(() => {
+    store.reset();
+  }, []);
+
+  useEffect(() => {
     if (done) {
       store.reset();
 
