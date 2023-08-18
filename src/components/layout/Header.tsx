@@ -6,6 +6,8 @@ import { apiService } from '../../services/ApiService';
 
 import useLoginUserStore from '../../hooks/useLoginUserStore';
 
+import { STATIC_ROUTES } from '../../constants/routes';
+
 import profileIcon from '../../assets/image/icon/profile-icon.png';
 import profileListIcon from '../../assets/image/icon/profile-list-icon.png';
 import chatListIcon from '../../assets/image/icon/chat-list-icon.png';
@@ -28,22 +30,22 @@ export default function Header() {
       <h2>CHATCHAT</h2>
       <div>
         <nav>
-          <NavLink to="/profile">
+          <NavLink to={STATIC_ROUTES.MY_PROFILE}>
             <img src={profileIcon} alt="" />
             <span>내 프로필</span>
           </NavLink>
-          <NavLink to="/companies">
+          <NavLink to={STATIC_ROUTES.OPEN_PROFILES}>
             <img src={profileListIcon} alt="" />
             <span>오픈 프로필 목록</span>
           </NavLink>
-          <NavLink to="/chatrooms">
+          <NavLink to={STATIC_ROUTES.CHATROOMS}>
             <img src={chatListIcon} alt="" />
             <span>채팅 목록</span>
           </NavLink>
         </nav>
 
         <nav>
-          <NavLink to="/account">
+          <NavLink to={STATIC_ROUTES.ACCOUNT}>
             <img src={accountIcon} alt="" />
             <span>계정 관리</span>
           </NavLink>
