@@ -3,12 +3,13 @@ import ChatRoomPage from './ChatRoomPage';
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import ProfileEditPage from './ProfileEditPage';
-import ProfilePage from './ProfilePage';
+import MyProfilePage from './MyProfilePage';
 import SignUpPage from './SignUpPage';
 import AutoReplyAdminPage from './AutoReplyAdminPage';
 import AutoReplyNewPage from './AutoReplyNewPage';
 import AutoReplyEditPage from './AutoReplyEditPage';
 import OpenProfileListPage from './OpenProfileListPage';
+import OpenProfilePage from './OpenProfilePage';
 
 export default {
   ChatListPage,
@@ -16,10 +17,11 @@ export default {
   HomePage,
   LoginPage,
   ProfileEditPage,
-  ProfilePage,
+  MyProfilePage,
   SignUpPage,
   AutoReplyAdminPage,
   AutoReplyNewPage,
   AutoReplyEditPage,
   OpenProfileListPage,
+  OpenProfilePage,
 };

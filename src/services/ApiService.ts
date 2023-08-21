@@ -193,6 +193,12 @@ export default class ApiService {
     return data;
   }
 
+  async fetchOpenProfile({ id } : { id : number}) {
+    const { data } = await this.instance.get(DYNAMIC_API_PATHS.OPEN_PROFILE(id));
+
+    return data;
+  }
+
   async uploadImage({ formData }:{
     formData: FormData;
   }) {

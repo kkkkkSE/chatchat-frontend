@@ -159,5 +159,23 @@ describe('routes', () => {
         screen.getByTestId(/auto-reply-edit/);
       });
     });
+
+    context('when the current path is "/open-profiles"', () => {
+      it('renders <OpenProfileListPage />', () => {
+        setupRouterProvider(STATIC_ROUTES.OPEN_PROFILES);
+
+        screen.getByTestId(/open-profile-list/);
+      });
+    });
+
+    context('when the current path is "/open-profiles/:id"', () => {
+      it('renders <OpenProfilePage />', () => {
+        const id = 1;
+
+        setupRouterProvider(DYNAMIC_ROUTES.OPEN_PROFILE(id));
+
+        screen.getByTestId(/open-profile/);
+      });
+    });
   });
 });
