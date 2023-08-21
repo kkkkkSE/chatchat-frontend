@@ -197,13 +197,13 @@ const customerHandlers = [
 
       return res(
         ctx.status(200),
-        ctx.json({ companies: filteredCompanies, page }),
+        ctx.json({ companySummaries: filteredCompanies, page }),
       );
     }
 
     return res(
       ctx.status(200),
-      ctx.json({ companies: sliceCompanies, page }),
+      ctx.json({ companySummaries: sliceCompanies, page }),
     );
   }),
   rest.get(`${BASE_URL}/companies/:id`, (req, res, ctx) => {
