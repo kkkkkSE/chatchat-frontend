@@ -18,7 +18,7 @@ const routes = [
     children: [
       { path: STATIC_ROUTES.CHATROOMS, element: <pages.ChatListPage /> },
       { path: `${STATIC_ROUTES.CHATROOMS}/:id`, element: <pages.ChatRoomPage /> },
-      { path: STATIC_ROUTES.MY_PROFILE, element: <pages.ProfilePage /> },
+      { path: STATIC_ROUTES.MY_PROFILE, element: <pages.MyProfilePage /> },
       { path: STATIC_ROUTES.MY_PROFILE_EDIT, element: <pages.ProfileEditPage /> },
       { path: STATIC_ROUTES.AUTO_REPLIES, element: <pages.AutoReplyAdminPage /> },
       { path: STATIC_ROUTES.AUTO_REPLIES_NEW, element: <pages.AutoReplyNewPage /> },

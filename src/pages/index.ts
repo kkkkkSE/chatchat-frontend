@@ -3,7 +3,7 @@ import ChatRoomPage from './ChatRoomPage';
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import ProfileEditPage from './ProfileEditPage';
-import ProfilePage from './ProfilePage';
+import MyProfilePage from './MyProfilePage';
 import SignUpPage from './SignUpPage';
 import AutoReplyAdminPage from './AutoReplyAdminPage';
 import AutoReplyNewPage from './AutoReplyNewPage';
@@ -16,7 +16,7 @@ export default {
   HomePage,
   LoginPage,
   ProfileEditPage,
-  ProfilePage,
+  MyProfilePage,
   SignUpPage,
   AutoReplyAdminPage,
   AutoReplyNewPage,
