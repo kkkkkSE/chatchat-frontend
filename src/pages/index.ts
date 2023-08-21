@@ -8,6 +8,7 @@ import SignUpPage from './SignUpPage';
 import AutoReplyAdminPage from './AutoReplyAdminPage';
 import AutoReplyNewPage from './AutoReplyNewPage';
 import AutoReplyEditPage from './AutoReplyEditPage';
+import OpenProfileListPage from './OpenProfileListPage';
 
 export default {
   ChatListPage,
@@ -20,4 +21,5 @@ export default {
   AutoReplyAdminPage,
   AutoReplyNewPage,
   AutoReplyEditPage,
+  OpenProfileListPage,
 };

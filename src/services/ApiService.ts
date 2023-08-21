@@ -184,6 +184,15 @@ export default class ApiService {
     await this.instance.delete(DYNAMIC_API_PATHS.AUTO_REPLIES_FOR_COMPANY(id));
   }
 
+  async fetchOpenProfiles({ page } : { page : number}) {
+    const { data } = await this.instance.get(
+      STATIC_API_PATHS.OPEN_PROFILES,
+      { params: { page } },
+    );
+
+    return data;
+  }
+
   async uploadImage({ formData }:{
     formData: FormData;
   }) {
