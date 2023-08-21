@@ -36,7 +36,7 @@ export default function PostLoginLayout() {
   return (
     <Container>
       <Outlet />
-      <Header />
+      <Header userType={userType} />
     </Container>
   );
 }

@@ -14,7 +14,7 @@ import chatListIcon from '../../assets/image/icon/chat-list-icon.png';
 import accountIcon from '../../assets/image/icon/account-icon.png';
 import logoutIcon from '../../assets/image/icon/logout-icon.png';
 
-export default function Header() {
+export default function Header({ userType } : {userType: string}) {
   const [, store] = useLoginUserStore();
 
   const handleClickLogout = async () => {
@@ -26,7 +26,7 @@ export default function Header() {
   };
 
   return (
-    <Container>
+    <Container userType={userType}>
       <h2>CHATCHAT</h2>
       <div>
         <nav>
@@ -34,10 +34,12 @@ export default function Header() {
             <img src={profileIcon} alt="" />
             <span>내 프로필</span>
           </NavLink>
-          <NavLink to={STATIC_ROUTES.OPEN_PROFILES}>
-            <img src={profileListIcon} alt="" />
-            <span>오픈 프로필 목록</span>
-          </NavLink>
+          {userType === 'customer' && (
+            <NavLink to={STATIC_ROUTES.OPEN_PROFILES}>
+              <img src={profileListIcon} alt="" />
+              <span>오픈 프로필 목록</span>
+            </NavLink>
+          )}
           <NavLink to={STATIC_ROUTES.CHATROOMS}>
             <img src={chatListIcon} alt="" />
             <span>채팅 목록</span>
@@ -62,7 +64,7 @@ export default function Header() {
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{userType: string}>`
   position: absolute;
   left: 0;
   z-index: 10;
@@ -147,8 +149,13 @@ const Container = styled.div`
         }
       }
 
-      nav:nth-child(1) { flex-grow : 3 };
+  ${(props) => (props.userType === 'customer'
+    ? 'nav:nth-child(1) { flex-grow : 3 };'
+    : 'nav:nth-child(1) { flex-grow : 2 };'
+  )}
+
       nav:nth-child(2) { flex-grow : 2 };
+
     }
 
     a.active{
