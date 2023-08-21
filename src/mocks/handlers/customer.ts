@@ -207,8 +207,11 @@ const customerHandlers = [
     );
   }),
   rest.get(`${BASE_URL}/companies/:id`, (req, res, ctx) => {
+    const id = Number(req.params.id);
+
     const { companies } = fixtures;
-    const company = companies[0];
+
+    const index = companies.findIndex((item) => item.id === id);
 
     const authorization = req.headers.get('Authorization');
     const accessToken = authorization ? authorization.split(' ')[1] : '';
@@ -217,7 +220,7 @@ const customerHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json(company),
+      ctx.json(companies[index]),
     );
   }),
 ];

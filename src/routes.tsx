@@ -24,6 +24,7 @@ const routes = [
       { path: STATIC_ROUTES.AUTO_REPLIES_NEW, element: <pages.AutoReplyNewPage /> },
       { path: `${STATIC_ROUTES.AUTO_REPLIES}/:id`, element: <pages.AutoReplyEditPage /> },
       { path: STATIC_ROUTES.OPEN_PROFILES, element: <pages.OpenProfileListPage /> },
+      { path: `${STATIC_ROUTES.OPEN_PROFILES}/:id`, element: <pages.OpenProfilePage /> },
     ],
   },
 ];

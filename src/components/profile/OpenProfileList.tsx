@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom';
+import { DYNAMIC_ROUTES } from '../../constants/routes';
+
 import useOpenProfileInfiniteQuery from '../../hooks/useOpenProfileInfiniteQuery';
 
 import { Profile } from '../../types';
@@ -5,6 +8,8 @@ import { Profile } from '../../types';
 import OpenProfileListRow from './OpenProfileListRow';
 
 export default function OpenProfileList() {
+  const navigate = useNavigate();
+
   const {
     ref, isLoading, data, error,
   } = useOpenProfileInfiniteQuery();
@@ -25,8 +30,8 @@ export default function OpenProfileList() {
     return <p>등록된 오픈 프로필이 없습니다.</p>;
   }
 
-  const handleClickProfile = () => {
-    // ...
+  const handleClickProfile = (id: number) => {
+    navigate(DYNAMIC_ROUTES.OPEN_PROFILE(id));
   };
 
   return (

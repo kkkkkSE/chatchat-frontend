@@ -9,6 +9,7 @@ import AutoReplyAdminPage from './AutoReplyAdminPage';
 import AutoReplyNewPage from './AutoReplyNewPage';
 import AutoReplyEditPage from './AutoReplyEditPage';
 import OpenProfileListPage from './OpenProfileListPage';
+import OpenProfilePage from './OpenProfilePage';
 
 export default {
   ChatListPage,
@@ -22,4 +23,5 @@ export default {
   AutoReplyNewPage,
   AutoReplyEditPage,
   OpenProfileListPage,
+  OpenProfilePage,
 };
