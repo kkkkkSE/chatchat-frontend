@@ -124,6 +124,19 @@ export default class ApiService {
     return data;
   }
 
+  async createChatRoom({ companyId } : {
+    companyId : number;
+  }) {
+    const { data } = await this.instance.post(
+      STATIC_API_PATHS.CREATE_CHATROOM,
+      { companyId },
+    );
+
+    const { chatRoomId } = data;
+
+    return chatRoomId;
+  }
+
   async fetchLoginUser({ type } : {
     type: string;
   }) {

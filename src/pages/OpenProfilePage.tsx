@@ -1,16 +1,22 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import useOpenProfileQuery from '../hooks/useOpenProfileQuery';
+
+import { apiService } from '../services/ApiService';
+
+import { DYNAMIC_ROUTES } from '../constants/routes';
 
 import ContentLayout from '../components/layout/ContentLayout';
 import OpenProfile from '../components/profile/OpenProfile';
 
 export default function OpenProfilePage() {
+  const navigate = useNavigate();
+
   const params = useParams();
-  const id = Number(params.id);
+  const companyId = Number(params.id);
 
   // TODO : id 없을 때 not found 페이지 이동
-  if (!id) {
+  if (!companyId) {
     return (
       <div>
         <p>Not Found</p>
@@ -18,7 +24,7 @@ export default function OpenProfilePage() {
     );
   }
 
-  const { isLoading, openProfile, error } = useOpenProfileQuery(id);
+  const { isLoading, openProfile, error } = useOpenProfileQuery(companyId);
 
   // TODO : Error Page로 이동하기
   if (error) {
@@ -29,8 +35,16 @@ export default function OpenProfilePage() {
     );
   }
 
-  const handleClickInquiry = () => {
-    // ...
+  const handleClickInquiry = async () => {
+    try {
+      const chatRoomId = await apiService.createChatRoom({
+        companyId,
+      });
+
+      navigate(DYNAMIC_ROUTES.CHATROOM(chatRoomId));
+    } catch (e) {
+      // TODO : Error Page로 이동하기
+    }
   };
 
   return (
