@@ -9,6 +9,7 @@ export const STATIC_API_PATHS = {
   AUTO_REPLIES_BY_COMPANY: '/company/auto-replies',
   REISSUE_TOKEN: '/token',
   LOGOUT: '/logout',
+  CREATE_CHATROOM: '/customer/chatrooms',
   UPLOAD_PROFILE_IMAGE: '/files?folder=profile',
 };
 
