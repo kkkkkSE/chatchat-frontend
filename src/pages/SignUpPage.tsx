@@ -1,22 +1,29 @@
-import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-import Button from '../components/ui/Button';
-import TextBox from '../components/ui/TextBox';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-function SignUpPage() {
+import { STATIC_ROUTES } from '../constants/routes';
+
+import SignUpForm from '../components/sign-up/SignUpForm';
+
+export default function SignUpPage() {
+  const navigate = useNavigate();
+
   const [searchParams] = useSearchParams();
 
-  const userType = searchParams.get('type');
+  const userType = searchParams.get('type') || '';
+
+  useEffect(() => {
+    const validUserTypes = ['company', 'customer'];
+
+    if (!validUserTypes.includes(userType)) {
+      navigate(STATIC_ROUTES.HOME);
+    }
+  }, []);
 
   return (
-    <div>
-      <TextBox label={userType === 'company' ? '기업명' : '이름'} value="" />
-      <TextBox label="아이디" value="" />
-      <TextBox label="비밀번호" value="" />
-      <TextBox label="비밀번호 확인" value="" />
-      <Button marginTop>가입하기</Button>
-    </div>
+    <SignUpForm
+      userType={userType}
+    />
   );
 }
-
-export default SignUpPage;

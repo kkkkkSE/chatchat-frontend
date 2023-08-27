@@ -61,6 +61,23 @@ export default class ApiService {
     );
   }
 
+  async signUp({
+    type, name, username, password, confirmPassword,
+  }: {
+    type: string;
+    name: string;
+    username: string;
+    password: string;
+    confirmPassword: string;
+  }) {
+    await this.instance.post(
+      DYNAMIC_API_PATHS.SIGN_UP(type),
+      {
+        name, username, password, confirmPassword,
+      },
+    );
+  }
+
   async login({ type, username, password } : {
     type: string;
     username: string;

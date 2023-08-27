@@ -85,26 +85,24 @@ describe('routes', () => {
       });
     });
 
-    // TODO : 회원가입 구현 후 주석 해제
+    describe('when the current path is "/sign-up"', () => {
+      context('without user type', () => {
+        it('redirect to home page', () => {
+          setupRouterProvider(STATIC_ROUTES.SIGN_UP);
 
-    // describe('when the current path is "/sign-up"', () => {
-    //   context('without user type', () => {
-    //     it('redirect to home page', () => {
-    //       setupRouterProvider(STATIC_ROUTES.SIGN_UP);
+          screen.getByText(/회원 유형을 선택해주세요/);
+        });
+      });
 
-    //       screen.getByText(/회원 유형을 선택해주세요/);
-    //     });
-    //   });
+      context('with user type', () => {
+        it('renders <SignUpPage />', () => {
+          setupRouterProvider(`${STATIC_ROUTES.SIGN_UP}?type=${user.type}`);
 
-    //   context('with user type', () => {
-    //     it('renders <SignUpPage />', () => {
-    //       setupRouterProvider(`${STATIC_ROUTES.SIGN_UP)}?type=${user.type}`);
-
-    //       screen.getByLabelText(/비밀번호 확인/);
-    //       screen.getByRole('button', { name: /가입하기/ });
-    //     });
-    //   });
-    // });
+          screen.getByLabelText(/비밀번호 확인/);
+          screen.getByRole('button', { name: /가입하기/ });
+        });
+      });
+    });
   });
 
   describe('after login', () => {
