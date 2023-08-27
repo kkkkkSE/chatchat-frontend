@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -8,6 +8,7 @@ type TextBoxProps = {
   type?: 'text' | 'password';
   value: string;
   onChange?: (value: string) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   readOnly?: boolean;
   maxLength?: number;
   showLength?: boolean;
@@ -19,6 +20,7 @@ export default function TextBox({
   type = 'text',
   value,
   onChange = undefined,
+  onKeyDown = undefined,
   readOnly = false,
   maxLength = undefined,
   showLength = false,
@@ -46,6 +48,7 @@ export default function TextBox({
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
+          onKeyDown={onKeyDown}
           readOnly={readOnly}
         />
       </label>
