@@ -11,7 +11,7 @@ import AutoReplyEditPage from './AutoReplyEditPage';
 import OpenProfileListPage from './OpenProfileListPage';
 import OpenProfilePage from './OpenProfilePage';
 
-export default {
+export {
   ChatListPage,
   ChatRoomPage,
   HomePage,
