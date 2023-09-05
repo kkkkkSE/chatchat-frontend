@@ -175,5 +175,21 @@ describe('routes', () => {
         screen.getByTestId(/open-profile/);
       });
     });
+
+    context('when the current path is "/account"', () => {
+      it('renders <AccountPage />', () => {
+        setupRouterProvider(STATIC_ROUTES.ACCOUNT);
+
+        screen.getByTestId(/account-management/);
+      });
+    });
+
+    context('when the current path is "/change-password"', () => {
+      it('renders <PasswordChangePage />', () => {
+        setupRouterProvider(STATIC_ROUTES.CHANGE_PASSWORD);
+
+        screen.getByTestId('password-change');
+      });
+    });
   });
 });
