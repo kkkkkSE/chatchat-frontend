@@ -10,6 +10,8 @@ import AutoReplyNewPage from './AutoReplyNewPage';
 import AutoReplyEditPage from './AutoReplyEditPage';
 import OpenProfileListPage from './OpenProfileListPage';
 import OpenProfilePage from './OpenProfilePage';
+import AccountPage from './AccountPage';
+import PasswordChangePage from './PasswordChangePage';
 
 export {
   ChatListPage,
@@ -24,4 +26,6 @@ export {
   AutoReplyEditPage,
   OpenProfileListPage,
   OpenProfilePage,
+  AccountPage,
+  PasswordChangePage,
 };

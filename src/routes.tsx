@@ -25,6 +25,8 @@ const routes = [
       { path: `${STATIC_ROUTES.AUTO_REPLIES}/:id`, element: <Pages.AutoReplyEditPage /> },
       { path: STATIC_ROUTES.OPEN_PROFILES, element: <Pages.OpenProfileListPage /> },
       { path: `${STATIC_ROUTES.OPEN_PROFILES}/:id`, element: <Pages.OpenProfilePage /> },
+      { path: STATIC_ROUTES.ACCOUNT, element: <Pages.AccountPage /> },
+      { path: STATIC_ROUTES.CHANGE_PASSWORD, element: <Pages.PasswordChangePage /> },
     ],
   },
 ];

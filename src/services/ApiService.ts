@@ -94,6 +94,24 @@ export default class ApiService {
     return accessToken;
   }
 
+  async changePassword({
+    type, password, newPassword, confirmNewPassword,
+  } : {
+    type: string;
+    password: string;
+    newPassword: string;
+    confirmNewPassword: string;
+  }) {
+    await this.instance.patch(
+      DYNAMIC_API_PATHS.CHANGE_PASSWORD(type),
+      {
+        password,
+        newPassword,
+        confirmNewPassword,
+      },
+    );
+  }
+
   async logout() {
     await this.instance.delete(STATIC_API_PATHS.LOGOUT);
   }
