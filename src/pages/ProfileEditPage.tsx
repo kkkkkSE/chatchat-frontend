@@ -20,6 +20,10 @@ export default function ProfileEditPage() {
 
       navigate(STATIC_ROUTES.MY_PROFILE);
     }
+
+    return () => {
+      store.reset();
+    };
   }, [done]);
 
   return (
