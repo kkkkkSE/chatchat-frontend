@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import ContentLayout from '../components/layout/ContentLayout';
 
+import { STATIC_ROUTES } from '../constants/routes';
+
 import passwordIcon from '../assets/image/icon/password-icon.png';
 import withdrawalIcon from '../assets/image/icon/withdrawal-icon.png';
 
@@ -15,13 +17,13 @@ export default function AccountPage() {
     >
       <ContainerList>
         <li>
-          <Link to="change-password">
+          <Link to={STATIC_ROUTES.CHANGE_PASSWORD}>
             <img src={passwordIcon} alt="" />
             <span>비밀번호 변경</span>
           </Link>
         </li>
         <li>
-          <Link to="delete-password">
+          <Link to={STATIC_ROUTES.DELETE_ACCOUNT}>
             <img src={withdrawalIcon} alt="" />
             <span>계정 탈퇴</span>
           </Link>
