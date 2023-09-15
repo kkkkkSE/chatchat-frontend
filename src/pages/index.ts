@@ -12,6 +12,7 @@ import OpenProfileListPage from './OpenProfileListPage';
 import OpenProfilePage from './OpenProfilePage';
 import AccountPage from './AccountPage';
 import PasswordChangePage from './PasswordChangePage';
+import WithdrawalPage from './WithdrawalPage';
 
 export {
   ChatListPage,
@@ -28,4 +29,5 @@ export {
   OpenProfilePage,
   AccountPage,
   PasswordChangePage,
+  WithdrawalPage,
 };

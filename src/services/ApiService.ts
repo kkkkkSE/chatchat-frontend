@@ -112,6 +112,16 @@ export default class ApiService {
     );
   }
 
+  async withdrawal({ type, password } : {
+    type: string;
+    password: string;
+  }) {
+    await this.instance.delete(
+      DYNAMIC_API_PATHS.SELF_ACCOUNT(type),
+      { data: { password } },
+    );
+  }
+
   async logout() {
     await this.instance.delete(STATIC_API_PATHS.LOGOUT);
   }

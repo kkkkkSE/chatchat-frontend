@@ -191,5 +191,13 @@ describe('routes', () => {
         screen.getByTestId('password-change');
       });
     });
+
+    context('when the current path is "/account/delete"', () => {
+      it('renders <WithdrawalPage />', () => {
+        setupRouterProvider(STATIC_ROUTES.DELETE_ACCOUNT);
+
+        screen.getByTestId(/withdrawal/);
+      });
+    });
   });
 });
