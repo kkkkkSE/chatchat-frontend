@@ -35,7 +35,7 @@ const useSSE = () => {
     });
 
     eventSource.addEventListener('error', (event: any) => {
-      if (event.error.message.startsWith('No activity within')) {
+      if (event.error?.message?.startsWith('No activity within')) {
         return;
       }
 
