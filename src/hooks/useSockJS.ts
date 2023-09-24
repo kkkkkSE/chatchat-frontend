@@ -5,10 +5,12 @@ import SockJS from 'sockjs-client';
 
 import { CompatClient, Stomp } from '@stomp/stompjs';
 
+import useAccessToken from './useAccessToken';
 import useChatRoomStore from './useChatRoomStore';
 import useLoginUserStore from './useLoginUserStore';
 
 const useSockJS = (chatRoomId: number) => {
+  const { accessToken } = useAccessToken();
   const [{ userType, profile }] = useLoginUserStore();
 
   const [, store] = useChatRoomStore();
@@ -25,12 +27,17 @@ const useSockJS = (chatRoomId: number) => {
           const newMessage = JSON.parse(response.body);
           store.addMessage(newMessage);
         },
-        {},
+        {
+          id: `${chatRoomId}`,
+          Authorization: `Bearer ${accessToken}`,
+        },
       );
     });
 
     return (() => {
-      client.current?.disconnect();
+      client.current?.disconnect(undefined, {
+        id: `${chatRoomId}`,
+      });
     });
   }, []);
 
